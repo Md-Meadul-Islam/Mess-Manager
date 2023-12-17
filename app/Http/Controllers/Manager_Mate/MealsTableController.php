@@ -48,6 +48,8 @@ class MealsTableController extends Controller
     public function edit(string $column)
     {
         $column_name = 'day_' . $column;
+        $users = User::where('batch', $this->batch)->where('status', 'active')->get();
+
         if ($column > (int) date('d') - 7) {
             $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
             session()->flash('toastr', ['type' => 'success', 'message' => 'Edit $ Updated Successful!']);

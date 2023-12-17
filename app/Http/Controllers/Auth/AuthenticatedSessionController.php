@@ -40,6 +40,7 @@ class AuthenticatedSessionController extends Controller
             default:
                 $url = route('welcome');
         }
+        session()->put('dates', now()->format('M-Y'));
         return redirect()->intended($url);
     }
 

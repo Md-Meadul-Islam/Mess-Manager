@@ -14,14 +14,14 @@
               {{-- In total meal --}}
                 <div class="col-xxl-6 col-md-12 col-lg-6">
                   <div class="card info-card sales-card align-items-center">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                       <h5 class="card-title">In-Total Meal <span>| this Month</span></h5>
 
                       <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                           <i class="bi bi-cup-hot-fill"></i>
                         </div>
-                        {{-- <div class="ps-3">
+                        <div class="ps-3">
                           @php
                             $grandtotal = 0;
                             $monthlyArrMeals = json_decode($monthlyDetails->dailymeals);
@@ -33,7 +33,7 @@
                               <h6 style="color:#012970; font-weight:700; font-size:28px"><i class="bi bi-filter-right"></i>
                                 {{$grandtotal}}</h6>
                             </a>
-                        </div> --}}
+                        </div>
                       </div>
                     </div>
 
@@ -43,13 +43,13 @@
                 {{-- total bazar --}}
                 <div class="col-xxl-6 col-md-12 col-lg-6">
                   <div class="card info-card sales-card align-items-center">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                       <h5 class="card-title">In-Total Bazar <span>| this Month</span></h5>
                       <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                           <i class="bi bi-cart-check-fill"></i>
                         </div>
-                        {{-- <div class="ps-3">
+                        <div class="ps-3">
                             @php
                             $totals = 0;
                             $monthlyArrBazar = json_decode($monthlyDetails->dailybazar);
@@ -57,10 +57,10 @@
                             $totals += $value->total;
                             }
                             @endphp
-                            <a href="{{route('shopping_details.index')}}">
+                            <a href="{{route('bazarstable.index')}}">
                               <h6 style="color:#012970; font-weight:700; font-size:28px"><i class="fa-solid fa-comments-dollar"></i> {{$totals}}/=</h6>
                             </a>
-                        </div> --}}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -68,7 +68,7 @@
                  {{-- end total bazar --}}
               <div class="row d-flex justify-content-center">
                  {{-- meal rate --}}
-                {{-- <div class="col-xxl-6 col-md-12 col-lg-6">
+                <div class="col-xxl-6 col-md-12 col-lg-6">
                   <div class="card info-card sales-card align-items-center">
                     <div class="card-body">
                       <h5 class="card-title">Meal Rate <span>| this Month</span></h5>
@@ -82,7 +82,7 @@
                             </a>
                         </div>
                       </div>
-                      <a class="btn btn-dark btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered" href="{{route('manager.dashboard.otherexpences', $monthlyDetails->id)}}">Add other Expencies</a> 
+                      <a class="btn btn-dark btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#verticalycentered" href="{{route('otherexpences', $monthlyDetails->id)}}">Add other Expencies</a> 
                       <div class="modal fade" id="verticalycentered" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
@@ -90,7 +90,7 @@
                               <h5 class="modal-title">Add Other Exepences</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{route('manager.dashboard.otherexpences', $monthlyDetails->id)}}" method="post">
+                            <form action="{{route('otherexpences', $monthlyDetails->id)}}" method="post">
                               @csrf
                               @method('PUT')
                               <div class="modal-body">
@@ -108,8 +108,8 @@
                                           @endphp
                                           @for ($i = 0; $i < count($array0); $i++)
                                               <tr class="deleteCell">
-                                                  <td><input type="text" name="ename1[]" value="{{$array0[$i]}}" class="ename form-control"></td>
-                                                  <td><input type="number" name="eprice1[]" value="{{$array1[$i]}}" class="eprice form-control"></td>
+                                                  <td><input type="text" name="ename[]" value="{{$array0[$i]}}" class="ename form-control"></td>
+                                                  <td><input type="number" name="eprice[]" value="{{$array1[$i]}}" class="eprice form-control"></td>
                                                   <td class="RetrivedDelete" style="text-align: center; font-weight: 800; color: orange; cursor: pointer;">✖</td>
                                               </tr>
                                           @endfor
@@ -125,7 +125,7 @@
                                 </table>
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class='fas fa-reply-all'></i></button>
                                 <button type="submit" name="submit" class="btn btn-outline-primary">Add / Update</button>
                               </div>
                             </form>
@@ -133,8 +133,8 @@
                               const tbody = document.querySelector('#otherExpences');
                                 const addButtonRow = document.querySelector('#add-button-row');
                                 const templates = `  <tr>
-                                <td><input type="text" name="ename2[]" class="ename form-control" /></td>
-                                <td><input type="number" name="eprice2[]" class="eprice form-control" /></td>
+                                <td><input type="text" name="ename[]" class="ename form-control" /></td>
+                                <td><input type="number" name="eprice[]" class="eprice form-control" /></td>
                                 <td><a href="#" class="delete">&#10006</a></td>
                                 </tr>`;
                                 const addButton = document.querySelector('.add-button');
@@ -146,11 +146,7 @@
                                     for (let y = 0; y < 1; y++) {
                                         addTableRow();
                                     }
-                                }
-                                // const generateOutputArray = () => Array.from(tbody.querySelectorAll('tr')).map(tr => ({
-                                //     eprice: tr.querySelector('.eprice').value
-                                // }));
-                    
+                                }                    
                                 addButton.addEventListener('click', e=>{
                                   e.preventDefault();
                                   addTableRow();
@@ -164,22 +160,13 @@
                                         removeTableRow(e);
                                 });
                                 generateTableBody();
-                                // total = 0;
-                                // outputButton.addEventListener('click', (e) => {
-                                //     e.preventDefault();
-                                //     var summation = generateOutputArray();
-                                //     generateOutputArray().forEach((sum) => {
-                                //         total += Number(sum.pprice);
-                                //     })
-                                //     document.querySelector('#totalValue').innerHTML = total;
-                                // });
                             </script>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div> --}}
+                </div>
                  {{--end meal rate --}}
               </div>
              
@@ -280,13 +267,13 @@
                 {{--details meal --}}
                 <div class="col-xxl-6 col-md-12 col-lg-6">
                   <div class="card info-card sales-card">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                       <h5 class="card-title">Total Meal <span>| by RoomMates</span></h5>  
                       <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                           <i class="bi bi-cup-hot-fill"></i>
                         </div>
-                        {{-- <div class="ps-3">
+                        <div class="ps-3">
                           <div class="row" style="margin-top: 20px">
                             <div class="col" style="line-height:16px">
                               @foreach ($users as $user)
@@ -299,7 +286,7 @@
                               @endforeach
                             </div>
                           </div>  
-                        </div> --}}
+                        </div>
                       </div>
                     </div>  
                   </div>
@@ -308,19 +295,19 @@
                 {{-- details bazar --}}
                 <div class="col-xxl-6 col-md-12 col-lg-6">
                   <div class="card info-card sales-card">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                       <h5 class="card-title">Total Bazar <span>| by RoomMates</span></h5>
                       <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                           <i class="bi bi-cart-check-fill"></i>
                         </div>
-                        {{-- <div class="ps-3">
+                        <div class="ps-3">
                           @foreach ($bazarsArr as $keys=>$values)
                           <p style="line-height: 10px; margin-top:20px"><span
                               class="text-muted small fw-bold">{{$values->user->name}}:</span><span
                               class="text-success small fw-bold ps-1">{{$values->total}} /=</span></p>
                           @endforeach
-                        </div>                         --}}
+                        </div>                        
                       </div>
                       
                     </div>
@@ -335,20 +322,17 @@
                     <div class="card-body">
                       <h5 class="card-title">RoomMates <span>| this Month</span></h5>
                       <div class="d-flex align-items-center">
-                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i class="bi bi-person-hearts"></i>
-                        </div>
-                        {{-- <div class="ps-3">
-                          <a href="{{route('mate.index')}}">
+                        <div class="ps-3 text-center">
+                          <a href="{{route('roommates.index')}}">
                             <h6 style="color:#012970; font-weight:700; font-size:28px"><i class="bi bi-hearts"></i>
                               0{{count($users)}}</h6>
                           </a>
-                          <div class="col" style="margin-top:16px;">
+                          <div class="col" style="margin-top:16px; text-align:center">
                             @foreach ($users as $user)
                             <span class="text-success small pt-1 fw-bold" style="text-wrap: nowrap">{{$user->name}}</span><br>
                             @endforeach
                           </div>
-                        </div> --}}
+                        </div>
                       </div>
                     </div>
                   </div>
