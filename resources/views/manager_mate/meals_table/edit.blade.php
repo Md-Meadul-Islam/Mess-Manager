@@ -11,15 +11,6 @@
                         <h1 class="card-title">Edit & Update Meals</h1>
                     </div>
                 </div>
-                <script>
-                    toastr.options = {
-                        closeButton: true,
-                        positionClass: 'toast-top-right',
-                    };                
-                    @if(session('toastr'))
-                        toastr.{{ session('toastr')['type'] }}('{{ session('toastr')['message'] }}');
-                    @endif
-                </script>
                 <!-- General Form Elements -->
                 <form action="{{route('mealstable.update', $column_name)}}" method="POST">
                     @csrf

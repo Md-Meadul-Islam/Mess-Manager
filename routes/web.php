@@ -17,6 +17,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 Route::middleware(['auth', 'role:manager,mate'])->prefix('manager_mate')->group(function () {
     Route::get('dashboard', [ManagerMateController::class, 'Index'])->name('manager_mate.dashboard');
     Route::get('dashboard/selectmonth', [ManagerMateController::class, 'monthSelect'])->name('monthselect');
+    Route::put('dashboard/otherexpences/{id}', [ManagerMateController::class, 'otherExpences'])->name('otherexpences');
+    Route::get('dashboard/faq', [ManagerMateController::class, 'faq'])->name('manager_mate.faq');
     Route::resource('mealstable', MealsTableController::class);
     Route::resource('bazarstable', BazarsTableController::class);
     Route::resource('roommates', RoommateController::class);

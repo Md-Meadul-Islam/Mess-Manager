@@ -59,6 +59,7 @@ class RegisteredUserController extends Controller
                 'batch' => $request->phone,
             ]);
             event(new Registered($user));
+            session()->put('dates', now()->format('M-Y'));
             Auth::login($user);
             return redirect()->route('manager_mate.dashboard');
         } elseif ($request->role === 'mate' && $findingRole) {
@@ -73,6 +74,7 @@ class RegisteredUserController extends Controller
                 'batch' => $request->phone2,
             ]);
             event(new Registered($user));
+            session()->put('dates', now()->format('M-Y'));
             Auth::login($user);
             return redirect()->route('manager_mate.dashboard');
         } else {
