@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager_Mate;
 use App\Http\Controllers\Controller;
 use App\Models\MealsTable;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,12 +27,20 @@ class MealsTableController extends Controller
     }
     public function index()
     {
+        $sessionDate = Carbon::createFromFormat('M-Y', session('dates'));
         if (session('dates') === now()->format('M-Y')) {
             $users = User::where('batch', $this->batch)->where('status', 'active')->get();
-        } else {
-            $users = User::where('batch', $this->batch)->get();
-        }
-
+        } elseif (session('dates') > now()->format('M-Y')) {
+            $mate = User::where('batch', $this->batch);
+            $users = $mate->where(function ($query) use ($sessionDate) {
+                $query->whereMonth('created_at', '<', $sessionDate->month)
+                    ->orWhere(function ($query) use ($sessionDate) {
+                        $query->whereMonth('created_at', $sessionDate->month)
+                            ->whereYear('created_at', $sessionDate->year);
+                    });
+            })->get();
+        } else
+            $users = null;
         $mealsByUser = [];
         if (Auth::user()->role === 'mate') {
             $meals = MealsTable::where('user_id', Auth::user()->id)->where('month', session('dates'))->with('user')->first();

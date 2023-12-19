@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,20 +13,16 @@
             <!-- Vendor CSS Files -->
             <link href="{{asset('backend')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
             <link href="{{asset('backend')}}/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-            <link href="{{asset('backend')}}/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-            <link href="{{asset('backend')}}/vendor/quill/quill.snow.css" rel="stylesheet">
-            <link href="{{asset('backend')}}/vendor/quill/quill.bubble.css" rel="stylesheet">
-            <link href="{{asset('backend')}}/vendor/remixicon/remixicon.css" rel="stylesheet">
-            <link href="{{asset('backend')}}/vendor/simple-datatables/style.css" rel="stylesheet">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
             <!-- Template Main CSS File -->
             <link href="{{asset('backend')}}/css/style.css" rel="stylesheet">
+            <link rel="stylesheet" href="{{asset('frontend')}}/style.css">
         <title>Mess Manager</title>
     </head>
 
     <body>
-        <h1>Mess Manager Welcome Page</h1>
-        <header id="header" class="header fixed-top d-flex align-items-center">
+        <div>
+          <header id="header" class="header fixed-top d-flex align-items-center">
 
             <div class="d-flex align-items-center justify-content-between">
               <a href="index.html" class="logo d-flex align-items-center">
@@ -47,9 +42,8 @@
         
                 <li class="nav-item dropdown">
         
-                  <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">0</span>
+                  <a class="nav-link nav-icon" title="FAQ" href="#faq" data-bs-toggle="dropdown">
+                   <i class="bi bi-question-octagon-fill"></i>
                   </a><!-- End Notification Icon -->        
                 </li><!-- End Notification Nav -->
                 <li class="nav-item d-block">
@@ -118,18 +112,52 @@
         
               </ul>
             </nav><!-- End Icons Navigation -->
-        
-          </header>
-        
+        </header>
+        <section class="py-5">
+          <div class="row">
+            <div class="col-12 justify-content-center">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                      <div class="col-xxl-6 col-md-12 col-lg-6">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <h1 class="card-title">Welcome to Mess Manager Application</h1>        
+                            <div class="align-items-center">
+                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <a href="{{route('login')}}"class="btn btn-success btn-outline-">Log-In</a>
+                                <a href="{{route('register')}}">Register</a>
+                              </div>
+                            </div>
+                          </div>
+      
+                        </div>
+                      </div>
+                      <div class="col-xxl-6 col-md-12 col-lg-6">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <h5 class="card-title">In-Total Bazar <span>| this Month</span></h5>
+                            <div class="d-flex align-items-center">
+                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-cart-check-fill"></i>
+                              </div>
+                              <div class="ps-3">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                   
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>    
+        </div>      
     </body>
-    <script src="{{asset('backend')}}/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="{{asset('backend')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('backend')}}/vendor/chart.js/chart.umd.js"></script>
-    <script src="{{asset('backend')}}/vendor/echarts/echarts.min.js"></script>
-    <script src="{{asset('backend')}}/vendor/quill/quill.min.js"></script>
-    <script src="{{asset('backend')}}/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="{{asset('backend')}}/vendor/tinymce/tinymce.min.js"></script>
-    <script src="{{asset('backend')}}/vendor/php-email-form/validate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/fontawesome.min.js"></script>
     <!-- Template Main JS File -->
     <script src="{{asset('backend')}}/js/main.js"></script>
