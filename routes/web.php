@@ -5,6 +5,7 @@ use App\Http\Controllers\Manager_Mate\BazarsTableController;
 use App\Http\Controllers\Manager_Mate\MealsTableController;
 use App\Http\Controllers\Manager_Mate\RoommateController;
 use App\Http\Controllers\ManagerMateController;
+use App\Http\Controllers\OthersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 

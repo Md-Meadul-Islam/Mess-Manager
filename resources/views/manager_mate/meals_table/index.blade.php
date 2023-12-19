@@ -43,7 +43,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for ($day = 1; $day <= (int)date('d'); $day++)
+                        @php
+                            if (session('dates')!== now()->format('M-Y')) {
+                                $date = strtotime(session('dates'));
+                                $days_in_month = cal_days_in_month(CAL_GREGORIAN, (int) date('m', $date), (int)date('y', $date));
+                            }else{
+                                $days_in_month = (int)date('d');
+                            }
+                        @endphp
+                        @for ($day = 1; $day <= $days_in_month; $day++)
                         <tr>
                             <td style="text-align:center;">{{$day.'-'.$mealsByUser[0]->month}}</td>
                             @foreach ($mealsByUser as $userId => $meals)
@@ -58,7 +66,7 @@
                             @endif                            
                             @endforeach
                             <td style="text-align:center;">
-                                @if (Auth::user()->role ==='manager' && $day > (int)date('d') - 7)
+                                @if (Auth::user()->role ==='manager' && session('dates')===now()->format('M-Y') && $day > (int)date('d') - 7)
                                 <a href="{{route('mealstable.edit', $day)}}" title="Edit" class="btn btn-danger btn-sm">
                                     <i class='fas fa-pen-nib'></i></a>
                                 @else
