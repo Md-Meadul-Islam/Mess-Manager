@@ -1,25 +1,208 @@
 /* custom CSS */
-.intro-content {
-    position: relative;
+body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
-.floating-items {
+.left-side-intro {
     display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 30%;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.left-content {
-    background: rgb(98, 111, 85);
-    display: flex;
-    padding-top: 40px;
     flex-direction: column;
-    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.welcome {
+    font-family: cursive;
+    font-weight: bolder;
+    letter-spacing: 3px;
+    padding: 0 3px 13px 3px;
+}
+
+.welcome span {
+    font-family: 'Times New Roman';
+    font-size: 64px;
+}
+
+/* intro video */
+.video-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
     text-align: center;
 }
 
-.left-content {}
+.video-wrapper>video {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 5px solid rgb(157, 151, 151);
+    border-radius: 15px;
+}
+
+/* Hide iOS Play Button */
+video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+}
+
+
+.playButton {
+    border-radius: 100px;
+    border: 8px solid #fff !important;
+    height: 100px;
+    position: absolute;
+    width: 100px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    cursor: pointer;
+    display: block;
+    opacity: 0.95;
+    transition: opacity 400ms;
+}
+
+.playButton:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 25px 0 25px 50px;
+    border-color: transparent transparent transparent #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: -10px;
+    bottom: 0;
+    margin: auto;
+}
+
+.pauseButton {
+    border-radius: 100px;
+    border: 8px solid #fff !important;
+    height: 100px;
+    position: absolute;
+    width: 100px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    cursor: pointer;
+    display: block;
+    opacity: 0.95;
+    transition: opacity 150ms;
+}
+
+.pauseButton:before {
+    display: block;
+    width: 10px;
+    content: "";
+    background-color: #FFF;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 23px;
+}
+
+.pauseButton:after {
+    display: block;
+    width: 10px;
+    content: "";
+    background-color: #FFF;
+    height: 50px;
+    position: absolute;
+    right: 30px;
+    top: 23px;
+}
+
+.replayButton {
+    border-radius: 100px;
+    border: 8px solid #fff !important;
+    height: 100px;
+    position: absolute;
+    width: 100px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    cursor: pointer;
+    display: block;
+    opacity: 0.95;
+    transition: opacity 150ms;
+}
+
+.replayButton:before {
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    content: '';
+    display: block;
+    border-color: transparent white white white;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 8px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.replayButton:after {
+    border-color: transparent transparent transparent white;
+    border-style: solid;
+    border-width: 0 45px 22px 22px;
+    height: 0;
+    position: absolute;
+    top: 40px;
+    left: 15px;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    content: "";
+    display: block;
+    margin: auto;
+}
+
+/* faq section start */
+
+.faq-header {
+    font-size: 15px;
+    transition: 0.4s;
+    color: white;
+    background: rgb(194, 194, 194);
+    border-bottom: 2px solid white;
+}
+
+.faq-header i {
+    color: saddlebrown;
+    transition: .5s;
+}
+
+.faq-header.active {
+    cursor: pointer;
+}
+
+.faq-header.active i {
+    color: seagreen;
+    transition: all .5s;
+}
+
+.faq-body {
+    padding: 0 18px;
+    background-color: rgb(180, 168, 168);
+    display: none;
+    overflow: hidden;
+    transition: all .5s;
+}
