@@ -4,6 +4,16 @@ body {
     scroll-behavior: smooth;
 }
 
+.left-side-intro {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+
+}
+
 .welcome {
     font-family: cursive;
     font-weight: bolder;
@@ -19,7 +29,12 @@ body {
 /* intro video */
 .video-wrapper {
     position: relative;
-    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
 }
 
 .video-wrapper>video {
@@ -28,6 +43,8 @@ body {
     box-sizing: border-box;
     vertical-align: middle;
     cursor: pointer;
+    border: 5px solid rgb(157, 151, 151);
+    border-radius: 15px;
 }
 
 /* Hide iOS Play Button */
@@ -156,4 +173,36 @@ video::-webkit-media-controls-start-playback-button {
     content: "";
     display: block;
     margin: auto;
+}
+
+/* faq section start */
+
+.faq-header {
+    font-size: 15px;
+    transition: 0.4s;
+    color: white;
+    background: rgb(194, 194, 194);
+    border-bottom: 2px solid white;
+}
+
+.faq-header i {
+    color: saddlebrown;
+    transition: .5s;
+}
+
+.faq-header.active {
+    cursor: pointer;
+}
+
+.faq-header.active i {
+    color: seagreen;
+    transition: all .5s;
+}
+
+.faq-body {
+    padding: 0 18px;
+    background-color: rgb(180, 168, 168);
+    display: none;
+    overflow: hidden;
+    transition: all .5s;
 }

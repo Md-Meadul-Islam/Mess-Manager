@@ -5,10 +5,25 @@ use App\Http\Controllers\Manager_Mate\BazarsTableController;
 use App\Http\Controllers\Manager_Mate\MealsTableController;
 use App\Http\Controllers\Manager_Mate\RoommateController;
 use App\Http\Controllers\ManagerMateController;
-use App\Http\Controllers\OthersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// frontend 
+Route::get('/config-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('route:cache');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('optimize:clear');
+    return "<h1>Cache Cleared!</h1>";
+});
+Route::get('/db-seed', function () {
+    // Artisan::call('db:seed');
+    Artisan::call('migrate');
+
+    return "<h1>Success!</h1>";
+});
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');

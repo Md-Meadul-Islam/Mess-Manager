@@ -1,16 +1,14 @@
-{
-    "faq": [
-        {
-            "title": "How can I Create and Log-in my Account?",
-            "body": "For Creating your account, first you should have <span style='color: green'>Register</span> your Account and then Log-in."
-        },
-        {
-            "title": "What means by Account Type?",
-            "body": "Suppose that you are in a mess/room and there living some <span style='color: green'>Room-Mate</span> and one <span style='color: green'>Manager</span>. This Account-Type means what type of role in your room(Manager/Room-Mate)."
-        },
-        {
-            "title": "Peter",
-            "body": "Jones"
-        }
-    ]
-}
+[
+    {
+        "title": "How can I Create and Log-in my Account?",
+        "body": "For Creating your account, first you should have <span style='color: green'>Register</span> your Account and then Log-in."
+    },
+    {
+        "title": "What means by Account Type?",
+        "body": "Suppose that you are in a mess/room and there living some <span style='color: green'>Room-Mate</span> and one <span style='color: green'>Manager</span>. This Account-Type means what type of role in your room(Manager/Room-Mate)."
+    },
+    {
+        "title": "Peter",
+        "body": "Jones"
+    }
+]

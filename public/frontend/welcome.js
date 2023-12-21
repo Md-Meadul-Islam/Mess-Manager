@@ -67,4 +67,20 @@ introvideo.addEventListener("mouseout", hideHoverPauseButton, true);
 el.addEventListener("mouseover", showHoverPauseButton, true);
 el.addEventListener("mouseover", hideControls, false);
 replay.addEventListener("mouseover", hideControls, false);
-introvideo.addEventListener("ended", videoEnd, false);  
+introvideo.addEventListener("ended", videoEnd, false);
+//intro video ended
+//faq section start
+var faqHeader = document.getElementsByClassName('faq-header');
+var i;
+for (i = 0; i < faqHeader.length; i++) {
+    faqHeader[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        this.childNodes[1].childNodes[1].firstElementChild.classList.toggle('fa-rotate-180');
+        var faqBody = this.parentElement.childNodes[3];
+        if (faqBody.style.display === "block") {
+            faqBody.style.display = "none";
+        } else {
+            faqBody.style.display = "block";
+        }
+    });
+}
