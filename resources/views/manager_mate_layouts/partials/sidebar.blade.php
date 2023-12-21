@@ -1,6 +1,6 @@
 <style>
   .sidebar-top{
-    height: 80%;
+    height: 70%;
   }
 </style>
 <aside id="sidebar" class="sidebar">
@@ -45,13 +45,19 @@
         
       </ul>
      </div>
+     <hr>
      <div class="sidebar-bottom" class="vertical-align: bottom;">
       <ul class="sidebar-nav">
         <li class="nav-item">
           <a class="nav-link"href="{{route('manager_mate.faq')}}">
             <i class="bi bi-question-octagon-fill"></i><span>FAQ</span><i class="ms-auto"></i>
           </a>
-        </li><!-- End Forms Nav -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"href="#footer">
+            <i class="fa-solid fa-address-card"></i><span>Contact</span><i class="ms-auto"></i>
+          </a>
+        </li>
       </ul>
      </div>
   </aside>

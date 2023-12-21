@@ -27,7 +27,7 @@
               </select>
              </div>
              <div class="col px-0">
-              <button type="submit" id="submitBtn" name="submit" class="btn btn-warning btn-outline-success">Submit</button>
+              <button type="submit" id="submitBtn" name="submit" class="btn btn-warning btn-outline-success">Select</button>
              </div>
            </div>
   

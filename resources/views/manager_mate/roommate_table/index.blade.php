@@ -74,27 +74,27 @@
                 <label for="name" class="form-label"><strong>Name</strong><span style="color:red"> *</span></label>
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-signature"></i></span>
-                  <input type="text" name="name" class="form-control" id="name" required autofocus autocomplete="name">
+                  <input type="text" name="name" class="form-control" required autofocus autocomplete="name">
                 </div>
               <div class="col-12">
                 <label for="email" class="form-label"><strong>Email</strong></label>
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-envelope"></i></span>
-                  <input type="email" name="email" class="form-control" id="email" autocomplete="email">
+                  <input type="email" name="email" class="form-control" autocomplete="email">
                 </div>
               </div>
               <div class="col-12">
                 <label for="phone" class="form-label"><strong>Phone</strong><span style="color:red; text-align:right"> *</span></label>
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
-                  <input type="text" name="phone" class="form-control" id="phone" required autocomplete="phone">
+                  <input type="text" name="phone" class="form-control" required autocomplete="phone">
                 </div>
               </div>
               <div class="col-12">
                 <label for="photo" class="form-label"><strong>Profile Photo</strong></label>
                 <div class="input-group has-validation">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-image"></i></span>
-                  <input type="file" name="photo" class="form-control" id="photo">
+                  <input type="file" name="photo" class="form-control">
                 </div>
               </div>
               <div class="col-12">

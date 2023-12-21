@@ -1,14 +1,22 @@
 [
     {
         "title": "How can I Create and Log-in my Account?",
-        "body": "For Creating your account, first you should have <span style='color: green'>Register</span> your Account and then Log-in."
+        "body": "For Creating your account, first you should have <span style='color: red'>Register</span> your Account and then Log-in. Your <span style='color:green'>Phone</span> and <span style='color:orange'>Email</span> must be uinque."
     },
     {
-        "title": "What means by Account Type?",
-        "body": "Suppose that you are in a mess/room and there living some <span style='color: green'>Room-Mate</span> and one <span style='color: green'>Manager</span>. This Account-Type means what type of role in your room(Manager/Room-Mate)."
+        "title": "What do you mean by Account Type?",
+        "body": "Suppose that you are in a mess/room and there living some <span style='color: yellow'>Room-Mate</span> and one <span style='color: red'>Manager</span>. This Account-Type means what type of role in your room(Manager/Room-Mate)."
     },
     {
-        "title": "Peter",
-        "body": "Jones"
+        "title": "How can I add my <span style='color: orange'>Daily Bazars</span>?",
+        "body": "If you are Room Manager, only you can add your and your Room-Mates <span style='color: red'>Daily Bazars</span>."
+    },
+    {
+        "title": "How can I add my <span style='color: yellow'>Daily Meals</span>?",
+        "body": "Don't need to add Meals for a day's. Meal Table shows your total day's in a month. If today this month's day is 9 then Meal Table shows 9 meal cells, and when a day is increment's then meal cells will add autometically. You can edit latest 7 days meal data as you needed."
+    },
+    {
+        "title": "How can I get Previous Month's data?",
+        "body": "From Top-Bar, you can select a month for viewing your data. It's can show latest 6-Month data."
     }
 ]
