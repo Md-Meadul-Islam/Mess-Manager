@@ -55,7 +55,7 @@
               <a class="nav-link px-2" href="{{route('register')}}">Register</a>
             </li>
             <li class="nav-item d-block">
-              <a class="nav-link px-2" title="FAQ" href="#faq">Faq</a>
+              <a class="nav-link px-2" title="FAQ" href="#faq">Qestions</a>
             </li>
             <li class="nav-item d-block">
               <a class="nav-link px-2" title="Contacts" href="#contact">Contact</a>
@@ -78,17 +78,12 @@
                 </div>
               </div>
               <div class="col-6 d-flex">
-                <div class="video-wrapper">
-                  <video id="IVideo">
-                    <source src="{{asset('video')}}/intro.mp4">
-                  </video>
-                  <div id="playButton" class="playButton" onclick="playPause()"></div>
-                  <div id="pauseButton" class="pauseButton" onclick="playPause()"></div>
-                  <div id="replayButton" class="replayButton" onclick="playPause()"></div>
+                <div class="video-wrapper">                  
+                   <div id="IVideo">
+                    <p>Intro Video Comming Soon....</p>
+                    {{-- <iframe src="https://drive.google.com/file/d/10VE82jQq9xVXqM2ozRDw9cMYuhmpiIQ5/preview" width="580"height="350" allow="autoplay"></iframe> --}}
+                   </div>
                 </div>
-                {{-- <div class="card justify-content-center text-center" style="width:100%">
-                  
-                </div> --}}
               </div>
             </div>
           </div>
@@ -98,7 +93,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <h1 class="text-center" style="font-family: cursive; font-weight:600">Frequently Asked Question</h1>
+              <h1 class="text-center" style="font-family: cursive; font-weight:600">Qestions and Answers</h1>
               <div class="card m-2 p-3">
                 @php
                     $faqJson = File::get(base_path('public/JSON/faq.json'));
