@@ -9,12 +9,12 @@
     </div><!-- End Logo -->
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-        <li class="nav-item dropdown pe-3">
+        <li class="nav-item pe-3"><a class="nav-link" href="{{route('welcome')}}" title="Welcome page">Home</a></li>
+        <li class="nav-item pe-3">
           <!-- resources/views/your-blade-view.blade.php -->
           <form action="{{route('monthselect')}}" method="GET" id="monthForm">
             @csrf
-           <div class="row p-0 m-0">
-            <div class="col px-0">
+            <div class="d-flex px-0" style="border: 1px solid rgb(130, 129, 125); border-radius:8px; box-shadow:0 3px 3px rgb(107, 106, 106)">
               <select name="monthSelect" id="monthSelect" class="form-select"  style="width:130px;">
                 @for ($i = 6; $i > 0; $i--)
                 @php
@@ -25,11 +25,8 @@
                 </option>
                 @endfor
               </select>
-             </div>
-             <div class="col px-0">
               <button type="submit" id="submitBtn" name="submit" class="btn btn-warning btn-outline-success">Select</button>
              </div>
-           </div>
   
            
           </form>

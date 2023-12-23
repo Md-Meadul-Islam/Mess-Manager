@@ -22,7 +22,6 @@
   <link href="{{asset('backend')}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="{{asset('backend')}}/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="{{ asset('vendor/toastr/toastr.min.css') }}">
   <!-- Template Main CSS File -->
   <link href="{{asset('backend')}}/css/style.css" rel="stylesheet">
 
@@ -69,10 +68,9 @@
   <!-- Vendor JS Files -->
   <script src="{{asset('backend')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/fontawesome.min.js"></script>
-  <script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <!-- Template Main JS File -->
   <script src="{{asset('backend')}}/js/main.js"></script>
-  {!! Toastr::message() !!}
 </body>
 
 </html>

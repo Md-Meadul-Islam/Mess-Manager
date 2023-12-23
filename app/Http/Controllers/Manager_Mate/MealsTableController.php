@@ -61,9 +61,6 @@ class MealsTableController extends Controller
 
         if ($column > (int) date('d') - 7) {
             $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
-            session()->flash('toastr', ['type' => 'success', 'message' => 'Edit $ Updated Successful!']);
-        } else {
-            session()->flash('toastr', ['type' => 'error', 'message' => 'Update Failed. Please try again!']);
         }
         return view('manager_mate.meals_table.edit', compact('mealTableEdit', 'column_name'));
     }
