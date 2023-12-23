@@ -54,6 +54,10 @@ class LoginRequest extends FormRequest
         Auth::login($user, $this->boolean('remember'));
 
         RateLimiter::clear($this->throttleKey());
+        $notification = array(
+            'message' => 'Successfully Login.',
+            'alert-type' => 'success'
+        );
     }
 
     /**
