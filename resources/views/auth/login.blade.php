@@ -6,17 +6,6 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-              @if(session('login_success'))
-                  <div id="toast-success" class="alert alert-success">
-                      {{ session('login_success') }}
-                  </div>
-              @endif
-              @if($errors->has('password'))
-              @dd($errors)
-                  <div id="toast-error" class="alert alert-danger">
-                      {{ $errors->first('password') }}
-                  </div>
-              @endif
               <div class="d-flex justify-content-center py-4">
                 <a href="{{route('welcome')}}" class="logo d-flex align-items-center w-auto">
                   <img src="{{asset('backend')}}/img/logo.png" alt="">
@@ -73,22 +62,4 @@
 
       </section>
     </div>
-    <script>
-      // Add this script to show/hide the toast messages
-      document.addEventListener('DOMContentLoaded', function () {
-          var toastSuccess = document.getElementById('toast-success');
-          if (toastSuccess) {
-              setTimeout(function () {
-                  toastSuccess.style.display = 'none';
-              }, 5000); // Adjust the time (in milliseconds) the toast message stays visible
-          }
-
-          var toastError = document.getElementById('toast-error');
-          if (toastError) {
-              setTimeout(function () {
-                  toastError.style.display = 'none';
-              }, 5000); // Adjust the time (in milliseconds) the toast message stays visible
-          }
-      });
-  </script>
 @endsection
