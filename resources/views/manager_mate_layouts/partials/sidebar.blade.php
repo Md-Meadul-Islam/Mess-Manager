@@ -29,20 +29,18 @@
               </a>
             </li>
           </ul>
-        </li><!-- End Tables Nav -->
+        </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="{{route('roommates.index')}}">
-            <i class="bi bi-person-hearts"></i><span>Room Mate</span><i class="bi bi-chevron-down ms-auto"></i>
+          <a class="nav-link " href="{{route('roommates.index')}}">
+            <i class="bi bi-person-hearts"></i>
+            <span>Members</span>
           </a>
-          <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-              <a href="{{route('roommates.index')}}">
-                <i class="bi bi-circle"></i><span>All Mates</span>
-              </a>
-            </li>
-          </ul>
-        </li><!-- End Forms Nav -->
-        
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="#"><i>🕞</i> 
+            <span>  Task</span>
+          </a>
+        </li><!-- End Dashboard Nav -->        
       </ul>
      </div>
      <hr>
@@ -50,7 +48,7 @@
       <ul class="sidebar-nav">
         <li class="nav-item">
           <a class="nav-link"href="{{route('manager_mate.faq')}}">
-            <i class="bi bi-question-octagon-fill"></i><span>FAQ</span><i class="ms-auto"></i>
+            <i class="bi bi-question-octagon-fill"></i><span>Doc</span><i class="ms-auto"></i>
           </a>
         </li>
         <li class="nav-item">

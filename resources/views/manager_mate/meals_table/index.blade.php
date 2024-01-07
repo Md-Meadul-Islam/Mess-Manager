@@ -2,15 +2,47 @@
 @section('manager_title', 'Meal Details | Mess Manager')
 @section('breadcrumb', 'Dashboard / Meal / Index')
 @section('manager_content')
-@if (session('toastr'))
-<script>
-    toastr.options = {
-        closeButton: true,
-        positionClass: 'toast-top-right',
-    };  
-    toastr.{{ session('toastr')['type'] }}('{{ session('toastr')['message'] }}'); 
-</script>    
-@endif
+<style>
+      .table-container{
+    overflow: auto;
+    scrollbar-color: rgb(78, 105, 95) transparent;
+  }
+      /* Webkit (Chrome, Safari, newer versions of Opera) */
+      .table-container::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+      background-color: rgb(78, 105, 95);
+      border-radius: 5px;
+    }
+
+    /* Firefox */
+    .table-container::-moz-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .table-container::-moz-scrollbar-thumb {
+      background-color: rgb(78, 105, 95);
+      border-radius: 5px;
+    }
+
+    /* Microsoft Edge and IE */
+    .table-container::-ms-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .table-container::-ms-scrollbar-thumb {
+      background-color: rgb(78, 105, 95);
+      border-radius: 5px;
+    }
+    .table-container::-ms-scrollbar-track {
+      background-color: transparent;
+    }
+</style>
 <div class="row">
     <div class="col-lg-12">
         <h1>Meals Table</h1>
@@ -21,7 +53,7 @@
                 @endif
                 <span style="color: red; font-weight:800">Breakfast(B)</span>,<span style="color: red; font-weight:800"> Lunch(L)</span>, <span style="color: red; font-weight:800"> Dinner(D)</span> data in this Table, and You don't need to create it again, just <strong>Edit & Update</strong> the specific date's data.</p>
             </div>
-            <div class="card-body">
+            <div class="card-body table-container">
                 @if (!empty($mealsByUser))
                 <table class="table table-bordered table-striped" id="mealdetails">
                     <thead>
@@ -66,7 +98,14 @@
                             @endif                            
                             @endforeach
                             <td style="text-align:center;">
-                                @if (Auth::user()->role ==='manager' && session('dates')===now()->format('M-Y') && $day > (int)date('d') - 7)
+                                {{-- @php
+                                    $userCreatedAt = Carbon::createFromFormat('Ymd', Auth::user()->created_at);
+                                    dump($userCreatedAt);
+                                @endphp --}}
+                                @if (Auth::user()->role == 'manager' && $meals->{"day_$day"} == null && $userCreationMonth == 0)
+                                <a href="{{route('mealstable.edit', $day)}}" title="Edit" class="btn btn-danger btn-sm">
+                                    <i class='fas fa-pen-nib'></i></a>                                   
+                                @elseif (Auth::user()->role =='manager' && session('dates')===now()->format('M-Y') && $day > (int)date('d') - 7)
                                 <a href="{{route('mealstable.edit', $day)}}" title="Edit" class="btn btn-danger btn-sm">
                                     <i class='fas fa-pen-nib'></i></a>
                                 @else

@@ -28,23 +28,35 @@ class MealsTableController extends Controller
     public function index()
     {
         $sessionDate = Carbon::createFromFormat('M-Y', session('dates'));
-        if (session('dates') === now()->format('M-Y')) {
-            $users = User::where('batch', $this->batch)->where('status', 'active')->get();
-        } elseif (session('dates') > now()->format('M-Y')) {
-            $mate = User::where('batch', $this->batch);
-            $users = $mate->where(function ($query) use ($sessionDate) {
-                $query->whereMonth('created_at', '<', $sessionDate->month)
-                    ->orWhere(function ($query) use ($sessionDate) {
-                        $query->whereMonth('created_at', $sessionDate->month)
-                            ->whereYear('created_at', $sessionDate->year);
+        $currentDate = now();
+        $currentDateNumeric = intval($currentDate->format('Ymd'));
+        $sessionDateNumeric = intval($sessionDate->format('Ymd'));
+        $sessionDateStartOfMonth = intval($sessionDate->startOfMonth()->format('Ymd'));
+        $sessionDateEndOfMonth = intval($sessionDate->endOfMonth()->format('Ymd'));
+        $sessionDateAddOneMonth = intval($sessionDate->startOfMonth()->addMonth()->format('Ymd'));
+        $users = [];
+        $users = User::when($sessionDateNumeric == $currentDateNumeric, function ($query) {
+            $query->where('status', 'active')->where('batch', $this->batch);
+        })
+            ->when($sessionDateNumeric < $currentDateNumeric, function ($query) use ($sessionDateStartOfMonth, $sessionDateEndOfMonth, $sessionDateAddOneMonth) {
+                $query->where(function ($query) use ($sessionDateAddOneMonth) {
+                    $query->where('status', 'active')->where('batch', $this->batch)
+                        ->where('create_at', '<=', $sessionDateAddOneMonth);
+                })
+                    ->orWhere(function ($query) use ($sessionDateStartOfMonth, $sessionDateEndOfMonth) {
+                        $query->where('status', 'inactive')->where('batch', $this->batch)
+                            ->where('update_at', '>=', $sessionDateStartOfMonth)
+                            ->where('update_at', '<=', $sessionDateEndOfMonth);
                     });
-            })->get();
-        } else
-            $users = null;
+            })
+            ->get();
         $mealsByUser = [];
         if (Auth::user()->role === 'mate') {
             $meals = MealsTable::where('user_id', Auth::user()->id)->where('month', session('dates'))->with('user')->first();
-            $mealsByUser[] = $meals;
+            if ($meals == null) {
+                $mealsByUser = [];
+            } else
+                $mealsByUser[] = $meals;
         } else {
             foreach ($users as $user) {
                 $userId = $user->id;
@@ -52,14 +64,22 @@ class MealsTableController extends Controller
                 $mealsByUser[] = $meals;
             }
         }
-        return view('manager_mate.meals_table.index', compact('mealsByUser'));
+        //for one time update
+        $userCreatedAt = Carbon::createFromFormat('Ymd', Auth::user()->create_at);
+        $userCreationMonth = 1;
+        if ($userCreatedAt->format('m') == Carbon::now()->format('m')) {
+            $userCreationMonth = 0;
+        } else
+            $userCreationMonth = 1;
+        return view('manager_mate.meals_table.index', compact('mealsByUser', 'userCreationMonth'));
     }
     public function edit(string $column)
     {
         $column_name = 'day_' . $column;
         $users = User::where('batch', $this->batch)->where('status', 'active')->get();
-
-        if ($column > (int) date('d') - 7) {
+        if (Auth::user()->role == 'manager' && MealsTable::first($column_name)->$column_name == null) {
+            $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
+        } elseif (Auth::user()->role == 'manager' && $column > (int) date('d') - 7) {
             $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
         }
         return view('manager_mate.meals_table.edit', compact('mealTableEdit', 'column_name'));
@@ -73,16 +93,18 @@ class MealsTableController extends Controller
         for ($i = 0; $i < count($request->user_id); $i++) {
             $meals = [];
             array_push($meals, [$request->breakfast[$i], $request->lunch[$i], $request->dinner[$i]]);
+
             MealsTable::updateOrInsert([
                 'user_id' => $request->user_id[$i],
                 'month' => session('dates'),
                 'batch' => $this->batch,
             ], [
+
                 $column_name => $meals[0],
+                'update_at' => now()->format('Ymd'),
                 'updated_at' => now(),
             ]);
         }
-        session()->flash('toastr', ['type' => 'success', 'message' => 'Edit $ Updated Successful!']);
         return redirect()->route('mealstable.index');
     }
 }

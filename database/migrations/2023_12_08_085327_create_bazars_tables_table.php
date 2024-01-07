@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->enum('role', ['manager', 'mate'])->default('mate');
             $table->string('batch');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('create_at', 8)->nullable();
+            $table->string('update_at', 8)->nullable();
             $table->timestamps();
         });
     }

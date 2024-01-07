@@ -24,7 +24,10 @@ return new class extends Migration {
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
             $table->string('batch');
+            $table->string('create_at', 8)->nullable();
+            $table->string('update_at', 8)->nullable();
             $table->timestamps();
+
         });
     }
 

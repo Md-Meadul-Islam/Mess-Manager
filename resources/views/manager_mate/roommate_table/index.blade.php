@@ -4,20 +4,20 @@
 @section('manager_content')
 <div class="row">
   <div class="col-lg-12">
-      <h1 class="text-center">Room-Mates</h1>
+      <h1 class="text-center">Members</h1>
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
               @if(session('dates')===now()->format('M-Y'))
               <a class="dropdown-item d-flex align-items-center"data-bs-toggle="modal" data-bs-target="#addnewmate" href="#">
-                <span class="btn btn-sm btn-info btn-outline-success">Add New Mate</span>
+                <span class="btn btn-sm btn-info btn-outline-success">Add New Member</span>
               </a>
               @endif
             </div>
-           @if ($mates == null || count($mates)==0)
+           @if ($mates == [] || count($mates)==0)
            <div class="card-body">
-            <p>Please add your Roommates.</p>
+            <p>Please add your Room-Mates/Member.</p>
            </div>
            @else
            <div class="card-body">           
@@ -64,7 +64,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5 text-center" id="">Add RoomMate</h1>
+          <h1 class="modal-title fs-5 text-center" id="">Add Member</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

@@ -37,51 +37,65 @@ class ManagerMateController extends Controller
     public function Index()
     {
         $sessionDate = Carbon::createFromFormat('M-Y', session('dates'));
-
-        if (session('dates') === now()->format('M-Y')) {
-            $users = User::where('batch', $this->batch)->where('status', 'active')->get();
-        } elseif (session('dates') > now()->format('M-Y')) {
-            $mate = User::where('batch', $this->batch);
-            $users = $mate->where(function ($query) use ($sessionDate) {
-                $query->whereMonth('created_at', '<', $sessionDate->month)
-                    ->orWhere(function ($query) use ($sessionDate) {
-                        $query->whereMonth('created_at', $sessionDate->month)
-                            ->whereYear('created_at', $sessionDate->year);
+        $currentDate = now();
+        $currentDateNumeric = intval($currentDate->format('Ymd'));
+        $sessionDateNumeric = intval($sessionDate->format('Ymd'));
+        $sessionDateStartOfMonth = intval($sessionDate->startOfMonth()->format('Ymd'));
+        $sessionDateEndOfMonth = intval($sessionDate->endOfMonth()->format('Ymd'));
+        $sessionDateAddOneMonth = intval($sessionDate->startOfMonth()->addMonth()->format('Ymd'));
+        $users = [];
+        $users = User::when($sessionDateNumeric == $currentDateNumeric, function ($query) {
+            $query->where('status', 'active')->where('batch', $this->batch);
+        })
+            ->when($sessionDateNumeric < $currentDateNumeric, function ($query) use ($sessionDateStartOfMonth, $sessionDateEndOfMonth, $sessionDateAddOneMonth) {
+                $query->where(function ($query) use ($sessionDateAddOneMonth) {
+                    $query->where('status', 'active')->where('batch', $this->batch)
+                        ->where('create_at', '<=', $sessionDateAddOneMonth);
+                })
+                    ->orWhere(function ($query) use ($sessionDateStartOfMonth, $sessionDateEndOfMonth) {
+                        $query->where('status', 'inactive')->where('batch', $this->batch)
+                            ->where('update_at', '>=', $sessionDateStartOfMonth)
+                            ->where('update_at', '<=', $sessionDateEndOfMonth);
                     });
-            })->get();
-        } else
-            $users = null;
+            })
+            ->get();
         // for insert into database  total meal by user
-        foreach ($users as $user) {
-            $userId = $user->id;
-            $mealByUser = MealsTable::where('user_id', $userId)->where('month', session('dates'))->first();
-            $totalCountasUser = 0;
-            if ($mealByUser) {
-                for ($i = 1; $i <= 31; $i++) {
-                    if (!$mealByUser->{"day_$i"}) {
-                        $mealByUser->{"day_$i"} = 0;
-                    } else {
-                        $mealcount = 0;
-                        for ($y = 0; $y < 3; $y++) {
-                            $mealcount += (int) (json_decode($mealByUser->{"day_$i"})[$y]);
+        if ($users) {
+            foreach ($users as $user) {
+                $userId = $user->id;
+                $mealByUser = MealsTable::where('user_id', $userId)->where('month', session('dates'))->first();
+                $totalCountasUser = 0;
+                if ($mealByUser) {
+                    for ($i = 1; $i <= 31; $i++) {
+                        if (!$mealByUser->{"day_$i"}) {
+                            $mealByUser->{"day_$i"} = 0;
+                        } else {
+                            $mealcount = 0;
+                            for ($y = 0; $y < 3; $y++) {
+                                $mealcount += (int) (json_decode($mealByUser->{"day_$i"})[$y]);
+                            }
+                            $mealByUser->{"day_$i"} = $mealcount;
                         }
-                        $mealByUser->{"day_$i"} = $mealcount;
+                        $totalCountasUser += (int) $mealByUser->{"day_$i"};
                     }
-                    $totalCountasUser += (int) $mealByUser->{"day_$i"};
                 }
+                MealsTable::updateOrInsert([
+                    'user_id' => $userId,
+                    'month' => session('dates'),
+                    'batch' => $this->batch,
+                ], [
+
+                    'total' => $totalCountasUser,
+                    'update_at' => now()->format('Ymd'),
+                    'updated_at' => now(),
+                ]);
             }
-            MealsTable::updateOrInsert([
-                'user_id' => $userId,
-                'month' => session('dates'),
-                'batch' => $this->batch
-            ], [
-                'total' => $totalCountasUser,
-                'updated_at' => now()
-            ]);
         }
         // for database table insert MonthlyTable
-
-        if (Auth::user()->role == 'manager') {
+        $bazarsArr = [];
+        $allMeals = [];
+        if (Auth::user()->role == 'manager' || Auth::user()->role == 'mate') {
+            $sessionDate = Carbon::createFromFormat('M-Y', session('dates'));
             $bazarsArr = BazarsTable::where('batch', $this->batch)->whereMonth('date', (int) $sessionDate->month)->with('user')->groupBy('user_id')->select('user_id', \DB::raw('SUM(total) as total'))->get();
             $totalbazar = 0;
             foreach ($bazarsArr as $value) {

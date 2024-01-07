@@ -32,6 +32,7 @@
             <span class="d-none d-lg-block">Mess Manager</span>
           </a>
         </div><!-- End Logo -->
+        
         <nav class="header-nav mx-auto d-flex">
           <ul class="d-flex flex-start justify-content-center">
             <li class="nav-item d-block">
@@ -43,7 +44,7 @@
               @endauth
             </li>
             <li class="nav-item d-block">
-              <a class="nav-link px-2" title="FAQ" href="#faq">Q & A</a>
+              <a class="nav-link px-2" title="FAQ" href="#doc">Doc</a>
             </li>
             <li class="nav-item d-block">
               <a class="nav-link px-2" title="Contacts" href="#contact">Contact</a>
@@ -56,7 +57,11 @@
           <p class="d-flex align-items-center my-5 pe-5"style="font-weight:800" title="User Name">{{Auth::user()->name}}</p>
           @endauth
         </div>
+        
       </header>
+      <div class="toggle-btn d-flex" onclick="toggleNav()">
+        <i class="bi bi-list"></i>
+      </div>
       <section id="intro" class="intro py-5" name="intro">
         <div class="row">
           <div class="col-12">
@@ -64,16 +69,17 @@
               <div class="col-xxl-6 col-lg-6 col-md-12 d-flex">
                 <div class="left-side-intro">
                   <h1 class="welcome">Welcome to <span style="color:rgb(56, 88, 170)">Mess Manager</span> Application</h1>
+                  <h4>Organize your messy life.</h4>
                   <div>
                     @auth
-                    <a href="{{route('logout')}}" class="btn btn-warning btn-outline-success px-5" onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Sign Out</a>
+                    <a href="{{route('logout')}}" class="btn btn-warning btn-outline-success px-5 my-2" onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Sign Out</a>
                     @endauth
                     <form id="logout_form" action="{{route('logout')}}" method="POST">
                       @csrf
                     </form>
                    @guest
-                   <a href="{{route('login')}}" class="btn btn-warning btn-outline-success px-5">Login</a>
-                   <a href="{{route('register')}}" class="btn btn-success btn-outline-warning px-5">Register</a>
+                   <a href="{{route('login')}}" class="btn btn-warning btn-outline-success px-5 my-2">Login</a>
+                   <a href="{{route('register')}}" class="btn btn-success btn-outline-warning px-5 my-2">Register</a>
                    @endguest                    
                   </div>
                 </div>
@@ -82,7 +88,7 @@
                 <div class="video-wrapper">                  
                    <div id="IVideo">
                     {{-- <iframe src="https://drive.google.com/file/d/10VE82jQq9xVXqM2ozRDw9cMYuhmpiIQ5/preview" width="580"height="350" allow="autoplay"></iframe> --}}
-                    <iframe src="https://drive.google.com/file/d/1Ggdsw8GII3iTUFvhIlvgmM-Eq00tC3hn/preview" width="580" height="350" allow="autoplay"></iframe>
+                    <iframe src="https://drive.google.com/file/d/1Ggdsw8GII3iTUFvhIlvgmM-Eq00tC3hn/preview" allow="autoplay" ></iframe>
                    </div>
                 </div>
               </div>
@@ -91,10 +97,11 @@
         </div>
       </section>
       <section>
+        
         <div class="row">
-          <div class="col-xxl-8 col-lg-6 col-md-12" id="faq" name="faq">
-            <div class="card">
-              <h1 class="text-center" style="font-family: cursive; font-weight:600; color:rgb(56, 88, 170)">Qestions and Answers</h1>
+          <div class="col-xxl-8 col-lg-6 col-md-12" id="doc" name="doc">
+            <div class="card">           
+              <h1 class="text-center" style="font-family: cursive; font-weight:600; color:rgb(56, 88, 170)">Documentations</h1>
               <div class="card m-2 p-3">
                 @php
                     $faqJson = File::get(base_path('public/JSON/faq.json'));
