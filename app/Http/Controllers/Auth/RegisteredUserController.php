@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -47,6 +47,7 @@ class RegisteredUserController extends Controller
         } else {
             $imageName = 'default.png';
         }
+        $DateNow = now()->format('Ymd');
         $findingRole = User::where('role', 'manager')->where('batch', $request->phone2)->first();
         if ($request->role === 'manager') {
             $user = User::create([
@@ -57,6 +58,8 @@ class RegisteredUserController extends Controller
                 'photo' => $imageName,
                 'password' => Hash::make($request->password),
                 'batch' => $request->phone,
+                'create_at' => $DateNow,
+                'update_at' => $DateNow,
             ]);
             event(new Registered($user));
             session()->put('dates', now()->format('M-Y'));
@@ -72,6 +75,8 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
                 'batch' => $request->phone2,
+                'create_at' => $DateNow,
+                'update_at' => $DateNow,
             ]);
             event(new Registered($user));
             session()->put('dates', now()->format('M-Y'));

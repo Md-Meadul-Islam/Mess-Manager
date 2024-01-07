@@ -12,7 +12,11 @@ class MealsTable extends Model
         'user_id',
         'month',
         'batch',
-        'updated_at'
+        'create_at',
+        'created_at',
+        'update_at',
+        'updated_at',
+
         // Other fillable properties...
     ];
     public function user()

@@ -54,11 +54,11 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
-
         static::created(
             function ($user) {
+                $DateNow = now()->format('Ymd');
                 $request = request();
-                $findRole = User::where('role', 'manager')->where('batch', $request->phone2)->first();
+                $findManager = User::where('role', 'manager')->where('batch', $request->phone2)->first();
                 if (!Auth::user()) {
                     if ($request->role === 'manager') {
                         MealsTable::create([
@@ -66,15 +66,17 @@ class User extends Authenticatable
                             'month' => now()->format("M-Y"),
                             'batch' => $request->phone,
                             'total' => 0,
-                            // Add other columns as needed
+                            'create_at' => $DateNow,
+                            'created_at' => now(),
                         ]);
-                    } elseif ($request->role === 'mate' && $findRole) {
+                    } elseif ($request->role === 'mate' && $findManager) {
                         MealsTable::create([
                             'user_id' => $user->id,
                             'month' => now()->format("M-Y"),
                             'batch' => $request->phone2,
                             'total' => 0,
-                            // Add other columns as needed
+                            'create_at' => $DateNow,
+                            'created_at' => now(),
                         ]);
                     } else {
                         return redirect()->route('register');
@@ -87,7 +89,8 @@ class User extends Authenticatable
                             'month' => now()->format("M-Y"),
                             'batch' => Auth::user()->batch,
                             'total' => 0,
-                            // Add other columns as needed
+                            'create_at' => $DateNow,
+                            'created_at' => now(),
                         ]);
                     } else {
                         return redirect()->route('manager_mate.dashboard');

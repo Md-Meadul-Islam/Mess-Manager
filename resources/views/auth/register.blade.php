@@ -88,7 +88,6 @@
                   </div>
                   <script>
                     const role = document.querySelector('#role');
-                    console.dir(role);
                     const options = document.querySelector('#typeselectoption');
                     document.addEventListener('DOMContentLoaded', function () {
                       role.addEventListener('change', function () {

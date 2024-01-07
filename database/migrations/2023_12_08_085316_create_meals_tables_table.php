@@ -20,6 +20,8 @@ return new class extends Migration {
             }
             $table->bigInteger('total')->default(0);
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('create_at', 8)->nullable();
+            $table->string('update_at', 8)->nullable();
             $table->timestamps();
         });
     }

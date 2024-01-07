@@ -26,21 +26,29 @@ class RoommateController extends Controller
     }
     public function index()
     {
-        if (session('dates') == now()->format('M-Y')) {
-            $mates = User::where('batch', $this->batch)->where('role', 'mate')->where('status', 'active')->get();
-        } elseif (session('dates') > now()->format('M-Y')) {
-            $sessionDate = Carbon::createFromFormat('M-Y', session('dates'));
-            $mate = User::where('batch', $this->batch)->where('role', 'mate');
-            $mates = $mate->where(function ($query) use ($sessionDate) {
-                $query->whereMonth('created_at', '<', $sessionDate->month)
-                    ->orWhere(function ($query) use ($sessionDate) {
-                        $query->whereMonth('created_at', $sessionDate->month)
-                            ->whereYear('created_at', $sessionDate->year);
+        $sessionDate = Carbon::createFromFormat('M-Y', session('dates'));
+        $currentDate = now();
+        $currentDateNumeric = intval($currentDate->format('Ymd'));
+        $sessionDateNumeric = intval($sessionDate->format('Ymd'));
+        $sessionDateStartOfMonth = intval($sessionDate->startOfMonth()->format('Ymd'));
+        $sessionDateEndOfMonth = intval($sessionDate->endOfMonth()->format('Ymd'));
+        $sessionDateAddOneMonth = intval($sessionDate->startOfMonth()->addMonth()->format('Ymd'));
+        $mates = [];
+        $mates = User::when($sessionDateNumeric == $currentDateNumeric, function ($query) {
+            $query->where('status', 'active')->where('batch', $this->batch);
+        })
+            ->when($sessionDateNumeric < $currentDateNumeric, function ($query) use ($sessionDateStartOfMonth, $sessionDateEndOfMonth, $sessionDateAddOneMonth) {
+                $query->where(function ($query) use ($sessionDateAddOneMonth) {
+                    $query->where('status', 'active')->where('batch', $this->batch)
+                        ->where('create_at', '<=', $sessionDateAddOneMonth);
+                })
+                    ->orWhere(function ($query) use ($sessionDateStartOfMonth, $sessionDateEndOfMonth) {
+                        $query->where('status', 'inactive')->where('batch', $this->batch)
+                            ->where('update_at', '>=', $sessionDateStartOfMonth)
+                            ->where('update_at', '<=', $sessionDateEndOfMonth);
                     });
-            })->get();
-        } else {
-            $mates = null;
-        }
+            })
+            ->get();
         return view('manager_mate.roommate_table.index', compact('mates'));
     }
     public function store(Request $request)

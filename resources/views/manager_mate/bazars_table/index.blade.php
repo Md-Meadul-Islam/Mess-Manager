@@ -34,9 +34,52 @@
       display: none;
       overflow: hidden;
   }
+ 
+  .table-container{
+    overflow: auto;
+    scrollbar-color: rgb(78, 105, 95) transparent;
+  }
   #bazartable thead tr th, #bazartable tfoot tr th{
     background-color:rgb(78, 105, 95);
   }
+  #bazartable{
+    border-collapse: collapse;
+  }
+    /* Webkit (Chrome, Safari, newer versions of Opera) */
+    .table-container::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+      background-color: rgb(78, 105, 95);
+      border-radius: 5px;
+    }
+
+    /* Firefox */
+    .table-container::-moz-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .table-container::-moz-scrollbar-thumb {
+      background-color: rgb(78, 105, 95);
+      border-radius: 5px;
+    }
+
+    /* Microsoft Edge and IE */
+    .table-container::-ms-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .table-container::-ms-scrollbar-thumb {
+      background-color: rgb(78, 105, 95);
+      border-radius: 5px;
+    }
+    .table-container::-ms-scrollbar-track {
+      background-color: transparent;
+    }
 </style>
 <div class="row">
     <div class="col-lg-12">
@@ -47,7 +90,7 @@
                 <h3 class="card-title"><a href="{{route('bazarstable.create')}}" class="btn btn-info btn-outline-success">Add New Bazar</a></h3>
                 @endif                
             </div>
-            <div class="card-body">
+            <div class="card-body table-container">
                 <table id="bazartable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
