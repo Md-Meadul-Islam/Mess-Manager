@@ -37,6 +37,7 @@ Route::middleware(['auth', 'role:manager,mate'])->prefix('manager_mate')->group(
     Route::get('dashboard/faq', [ManagerMateController::class, 'faq'])->name('manager_mate.faq');
     Route::resource('mealstable', MealsTableController::class);
     Route::resource('bazarstable', BazarsTableController::class);
+    Route::post('bazarstatus/{id}', [BazarsTableController::class, 'bazarstatus'])->name('bazarstatus');
     Route::resource('roommates', RoommateController::class);
 });
 Route::middleware('auth')->group(function () {

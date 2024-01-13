@@ -1,6 +1,6 @@
 @extends('manager_mate_layouts.app')
-@section('manager_title', ' Add Shopping Details | Dashboard')
-@section('breadcrumb', 'Dashboard /Shopping / Create')
+@section('manager_title', ' Add Bazar | Dashboard')
+@section('breadcrumb', 'Dashboard / Bazar / Create')
 @section('manager_content')
 <style>
     input::-webkit-outer-spin-button,
@@ -8,22 +8,19 @@
            -webkit-appearance: none;
             margin: 0;
     }
-
     input[type=number] {
         -moz-appearance: textfield;
     }
 </style>
         <div class="row">
-            <div class="col-lg-12">
-            
+            <div class="col-lg-12">            
                 <div class="card">
                     <div class="card-body">
                         <div class=" d-flex">
                             <div class="col-lg-6 ">
-                                <h1 class="card-title"> Add New Shopping</h1>
+                                <h1 class="card-title"> Add New Bazar</h1>
                             </div>
                         </div>
-
                         <!-- General Form Elements -->
                         <form action="{{route('bazarstable.store')}}" method="POST">
                             @csrf
@@ -71,10 +68,13 @@
                                   </button>
                                 <div class="col-lg-6 float-end">
                                     <a href="{{route('bazarstable.index')}}" title="Back" class="btn btn-success btn-sm"><i class='fas fa-reply-all'></i></a>
+                                @if (Auth::user()->role == 'manager')
                                 <input type="submit" value="Create" class="btn btn-primary btn-sm">
+                                @else
+                                <input type="submit" value="Send Request" class="btn btn-primary btn-sm">
+                                @endif
                                 </div>
-                            </div>
-                            
+                            </div>                            
                         </form><!-- End General Form Elements -->
                     </div>
                 </div>
@@ -141,7 +141,6 @@
                 let pprice = 'pprice' + i;
                 i++;
                 const tableEle = creatTableEl(pname, pweight, pprice);
-
                 tbody.append(tableEle);
             }
             function Table() {
@@ -156,7 +155,6 @@
             }
             Table();
             const generateOutputArray = () => Array.from(tbody.querySelectorAll('tr')).map(tr => ({
-
                 pprice: tr.querySelector('.pprice').value
             }));
             total = 0;

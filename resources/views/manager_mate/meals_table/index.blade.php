@@ -52,6 +52,7 @@
                 @else your's and each Room-mate's 
                 @endif
                 <span style="color: red; font-weight:800">Breakfast(B)</span>,<span style="color: red; font-weight:800"> Lunch(L)</span>, <span style="color: red; font-weight:800"> Dinner(D)</span> data in this Table, and You don't need to create it again, just <strong>Edit & Update</strong> the specific date's data.</p>
+                <p style="color: red"><span style="font-weight:800">{{__('N.B. ')}}</span>{{__('You can update Meal details for the last seven days of a month multiple times. Others you can update only one times.')}}</p>
             </div>
             <div class="card-body table-container">
                 @if (!empty($mealsByUser))
@@ -98,10 +99,6 @@
                             @endif                            
                             @endforeach
                             <td style="text-align:center;">
-                                {{-- @php
-                                    $userCreatedAt = Carbon::createFromFormat('Ymd', Auth::user()->created_at);
-                                    dump($userCreatedAt);
-                                @endphp --}}
                                 @if (Auth::user()->role == 'manager' && $meals->{"day_$day"} == null && $userCreationMonth == 0)
                                 <a href="{{route('mealstable.edit', $day)}}" title="Edit" class="btn btn-danger btn-sm">
                                     <i class='fas fa-pen-nib'></i></a>                                   

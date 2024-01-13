@@ -96,7 +96,7 @@ class ManagerMateController extends Controller
         $allMeals = [];
         if (Auth::user()->role == 'manager' || Auth::user()->role == 'mate') {
             $sessionDate = Carbon::createFromFormat('M-Y', session('dates'));
-            $bazarsArr = BazarsTable::where('batch', $this->batch)->whereMonth('date', (int) $sessionDate->month)->with('user')->groupBy('user_id')->select('user_id', \DB::raw('SUM(total) as total'))->get();
+            $bazarsArr = BazarsTable::where('batch', $this->batch)->where('status', true)->whereMonth('date', (int) $sessionDate->month)->with('user')->groupBy('user_id')->select('user_id', \DB::raw('SUM(total) as total'))->get();
             $totalbazar = 0;
             foreach ($bazarsArr as $value) {
                 $totalbazar += $value->total;
@@ -107,7 +107,7 @@ class ManagerMateController extends Controller
                 $totalMeals += $value;
             }
 
-            $allbazar = BazarsTable::where('batch', $this->batch)->whereMonth('date', (int) $sessionDate->month)->groupBy('user_id')->select('user_id', \DB::raw('SUM(total) as total'))->get();
+            $allbazar = BazarsTable::where('batch', $this->batch)->where('status', true)->whereMonth('date', (int) $sessionDate->month)->groupBy('user_id')->select('user_id', \DB::raw('SUM(total) as total'))->get();
             MonthlyTable::updateOrInsert(
                 [
                     'batch' => $this->batch,

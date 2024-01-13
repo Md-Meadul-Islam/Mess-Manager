@@ -1,21 +1,19 @@
 @extends('manager_mate_layouts.app')
-@section('manager_title', ' Edit Shopping Details | Mess Manager')
-@section('breadcrumb', 'Dashboard / Shopping / Edit')
+@section('manager_title', ' Edit Bazar | Mess Manager')
+@section('breadcrumb', 'Dashboard / Bazar / Edit')
 @section('manager_content')
 <style>
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
            -webkit-appearance: none;
             margin: 0;
     }
-
     input[type=number] {
         -moz-appearance: textfield;
     }
 </style>
         <div class="row">
-            <div class="col-lg-12">
-            
+            <div class="col-lg-12">            
                 <div class="card">
                     <div class="card-body">
                         <div class=" d-flex">
@@ -23,7 +21,6 @@
                                 <h1 class="card-title"> Edit & Update Bazars</h1>
                             </div>
                         </div>
-
                         <!-- General Form Elements -->
                         <form action="{{route('bazarstable.update', $bazarsDetails->id)}}" method="POST">
                             @csrf
@@ -58,9 +55,9 @@
                                             <tbody>
                                                 @php
                                                     $details = json_decode($bazarsDetails->details);
-                                                    $array0 = $details->product_name;
-                                                    $array1 = $details->product_weight;
-                                                    $array2 = $details->product_price;
+                                                    $array0 = $details->p_name;
+                                                    $array1 = $details->p_weight;
+                                                    $array2 = $details->p_price;
                                                 @endphp
                                                 @for ($i = 0; $i < count($array0); $i++)
                                                     <tr class="deleteCell">
@@ -106,7 +103,6 @@
             </tr>`;
             const addButton = document.querySelector('.add-button');
             const outputButton = document.querySelector('#output-button');
-
             const addTableRow = () => tbody.innerHTML += templates;
             const removeTableRow = e => e.target.closest('tr').remove();
             const generateTableBody = () => {
@@ -117,7 +113,6 @@
             const generateOutputArray = () => Array.from(tbody.querySelectorAll('tr')).map(tr => ({
                 pprice: tr.querySelector('.pprice').value
             }));
-
             addButton.addEventListener('click', addTableRow);
             tbody.addEventListener('click', e => {
                 e.preventDefault();

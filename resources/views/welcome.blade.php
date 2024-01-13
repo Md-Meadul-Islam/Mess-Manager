@@ -110,11 +110,11 @@
                 @foreach ($faqData as $key=>$faq)
                 <div class="faq-content">
                   <div class="faq-header p-2">
-                    <h4 style="position: relative">{!! $faq->title !!}<span
+                    <h4 style="position: relative">{!!__($faq->title)!!}<span
                         style="position: absolute; right:5px"><i class="fa-solid fa-angle-down"></i></span></h4>
                   </div>
                   <div class="faq-body pt-2">
-                    <p>{!! $faq->body !!}</p>
+                    <p>{!!__($faq->body)!!}</p>
                   </div>
                 </div>
                 @endforeach

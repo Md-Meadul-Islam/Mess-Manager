@@ -18,14 +18,18 @@ class BazarsTableController extends Controller
             if (Auth::check()) {
                 $this->batch = Auth::user()->batch;
             }
-
             return $next($request);
         });
     }
     public function index()
     {
         $date = strtotime(session('dates'));
-        $bazarlists = BazarsTable::where('batch', $this->batch)->whereMonth('date', (int) date('m', $date))->get();
+
+        if (Auth::user()->role == 'manager') {
+            $bazarlists = BazarsTable::where('batch', $this->batch)->whereMonth('date', (int) date('m', $date))->get();
+        } elseif (Auth::user()->role == 'mate') {
+            $bazarlists = BazarsTable::where('user_id', Auth::user()->id)->where('batch', $this->batch)->whereMonth('date', (int) date('m', $date))->first();
+        }
         return view('manager_mate.bazars_table.index', compact('bazarlists'));
     }
     public function create()
@@ -39,19 +43,16 @@ class BazarsTableController extends Controller
             'date' => 'required',
             'user_id' => 'required'
         ]);
-
+        $user_id = $request->user_id;
         $summation = 0;
         $pnameArr = [];
         $pweightArr = [];
         $ppriceArr = [];
-
         $lengthInput = (count($request->all()) - 3) / 3;
         for ($i = 0; $i < $lengthInput; $i++) {
-
             $pname = 'pname' . $i;
             $pwieght = 'pweight' . $i;
             $pprice = 'pprice' . $i;
-
             $pnameArr[] = $request->$pname;
             $pweightArr[] = $request->$pwieght;
             $ppriceArr[] = $request->$pprice;
@@ -64,15 +65,21 @@ class BazarsTableController extends Controller
             'p_weight' => $pweightArr,
             'p_price' => $ppriceArr
         ];
-
+        if (Auth::user()->role === 'manager') {
+            $status = true;
+        } else
+            $status = false;
         $shopping = new BazarsTable();
         $shopping->user_id = $request->user_id;
         $shopping->date = $request->date;
         $shopping->details = json_encode($detailsArr);
+        $shopping->status = $status;
+        $shopping->role = User::find($user_id)->role;
         $shopping->total = $summation;
         $shopping->batch = $this->batch;
+        $shopping->created_at = now();
+        $shopping->updated_at = null;
         $shopping->save();
-
         return redirect()->route('bazarstable.index');
     }
     public function edit(string $id)
@@ -103,21 +110,32 @@ class BazarsTableController extends Controller
             'p_weight' => $pweights,
             'p_price' => $pprices,
         ];
-        $bazars = BazarsTable::find($id);
-        $bazars->user_id = $request->user_id;
-        $bazars->date = $request->date;
-        $bazars->total = $summation;
-        $bazars->details = json_encode($detailsArr);
-        $bazars->role = User::find($user_id)->role;
-        $bazars->batch = $this->batch;
-        $bazars->updated_at = Carbon::now();
-        $bazars->save();
-
+        if (Auth::user()->role == 'manager') {
+            $bazars = BazarsTable::find($id);
+            $bazars->user_id = $request->user_id;
+            $bazars->date = $request->date;
+            $bazars->total = $summation;
+            $bazars->details = json_encode($detailsArr);
+            $bazars->status = 1;
+            $bazars->role = User::find($user_id)->role;
+            $bazars->batch = $this->batch;
+            $bazars->updated_at = Carbon::now();
+            $bazars->save();
+        }
+        return redirect()->route('bazarstable.index');
+    }
+    public function bazarstatus(Request $request, $id)
+    {
+        if (Auth::user()->role === 'manager') {
+            $statusFind = BazarsTable::find($id);
+            $statusFind->status = true;
+            $statusFind->save();
+        }
         return redirect()->route('bazarstable.index');
     }
     public function destroy(string $id)
     {
         BazarsTable::find($id)->delete();
-        return redirect()->route('shopping_detials.index');
+        return redirect()->route('bazarstable.index');
     }
 }
