@@ -101,12 +101,15 @@ body {
 }
 
 /* faq section start */
+.faq-content {
+    transition: all .25s ease-in-out;
+}
 
 .faq-header {
     font-size: 15px;
     transition: 0.4s;
     color: white;
-    background: rgb(194, 194, 194);
+    background-color: rgb(125, 151, 141);
     border-bottom: 2px solid white;
 }
 
@@ -126,8 +129,9 @@ body {
 
 .faq-body {
     padding: 0 18px;
-    background-color: rgb(180, 168, 168);
+    background-color: rgb(107, 107, 134);
+    color: white;
     display: none;
     overflow: hidden;
-    transition: all .5s;
+    text-align: justify;
 }

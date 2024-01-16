@@ -2,36 +2,36 @@
 @section('manager_title', 'FAQ | Dashboard')
 @section('breadcrumb', 'Dashboard / Mates / FAQ')
 @section('manager_content')
-<style>
+<style>    
     .faq-header {
-    font-size: 15px;
-    transition: 0.4s;
-    color: white;
-    background: rgb(194, 194, 194);
-    border-bottom: 2px solid white;
-}
+        font-size: 15px;
+        transition: 0.4s;
+        color: white;
+        background: rgb(194, 194, 194);
+        border-bottom: 2px solid white;
+    }
 
-.faq-header i {
-    color: saddlebrown;
-    transition: .5s;
-}
+    .faq-header i {
+        color: saddlebrown;
+        transition: .5s;
+    }
 
-.faq-header.active {
-    cursor: pointer;
-}
+    .faq-header.active {
+        cursor: pointer;
+    }
 
-.faq-header.active i {
-    color: seagreen;
-    transition: all .5s;
-}
+    .faq-header.active i {
+        color: seagreen;
+        transition: all .5s;
+    }
 
-.faq-body {
-    padding: 0 18px;
-    background-color: rgb(180, 168, 168);
-    display: none;
-    overflow: hidden;
-    transition: all .5s;
-}
+    .faq-body {
+        padding: 0 18px;
+        background-color: rgb(180, 168, 168);
+        display: none;
+        overflow: hidden;
+        transition: all .5s;
+    }
 </style>
 <div class="row">
     <div class="col-12">
@@ -45,11 +45,11 @@
               @foreach ($faqData as $key=>$faq)
               <div class="faq-content">
                 <div class="faq-header p-2">
-                  <h4 style="position: relative">{!! $faq->title !!}<span
+                  <h4 style="position: relative">{!!__( $faq->title )!!}<span
                       style="position: absolute; right:5px"><i class="fa-solid fa-angle-down"></i></span></h4>
                 </div>
                 <div class="faq-body pt-2">
-                  <p>{!! $faq->body !!}</p>
+                  <p>{!!__( $faq->body )!!}</p>
                 </div>
               </div>
               @endforeach

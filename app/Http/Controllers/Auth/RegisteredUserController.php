@@ -33,8 +33,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'phone' => ['required', 'string', 'unique:' . User::class],
-            'photo' => ['mimes:jpg,jpeg,png'],
+            'phone' => ['required', 'string', 'max:15', 'min:8', 'regex:/^[0-9\(\)\-\s]*$/', 'unique:' . User::class],
+            'photo' => ['image', 'mimes:jpg,jpeg,png', 'dimensions:max_width=1000,max_height=1000'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         $image = $request->file('photo');

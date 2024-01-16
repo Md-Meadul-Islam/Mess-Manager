@@ -1,6 +1,6 @@
 @extends('manager_mate_layouts.app')
-@section('manager_title', ' Add Shopping Details | Dashboard')
-@section('breadcrumb', 'Dashboard /Shopping / Create')
+@section('manager_title', ' Add Bazar | Dashboard')
+@section('breadcrumb', 'Dashboard / Bazar / Create')
 @section('manager_content')
 <style>
     input::-webkit-outer-spin-button,
@@ -8,22 +8,19 @@
            -webkit-appearance: none;
             margin: 0;
     }
-
     input[type=number] {
         -moz-appearance: textfield;
     }
 </style>
         <div class="row">
-            <div class="col-lg-12">
-            
+            <div class="col-lg-12">            
                 <div class="card">
                     <div class="card-body">
                         <div class=" d-flex">
                             <div class="col-lg-6 ">
-                                <h1 class="card-title"> Add New Shopping</h1>
+                                <h1 class="card-title"> Add New Bazar</h1>
                             </div>
                         </div>
-
                         <!-- General Form Elements -->
                         <form action="{{route('bazarstable.store')}}" method="POST">
                             @csrf
@@ -71,10 +68,13 @@
                                   </button>
                                 <div class="col-lg-6 float-end">
                                     <a href="{{route('bazarstable.index')}}" title="Back" class="btn btn-success btn-sm"><i class='fas fa-reply-all'></i></a>
+                                @if (Auth::user()->role == 'manager')
                                 <input type="submit" value="Create" class="btn btn-primary btn-sm">
+                                @else
+                                <input type="submit" value="Send Request" class="btn btn-primary btn-sm">
+                                @endif
                                 </div>
-                            </div>
-                            
+                            </div>                            
                         </form><!-- End General Form Elements -->
                     </div>
                 </div>
@@ -85,7 +85,7 @@
             let addBtn = document.querySelector('#add-button-row');
             let outputButton = document.querySelector('#output-button');
             let i = 4;
-            function creatTableEl(pname, pweight, pprice) {
+            function creatTableEl() {
                 const createTR = document.createElement("tr");
                 tbody.appendChild(createTR);
                 const createTD1 = document.createElement("td");
@@ -97,19 +97,19 @@
                 const createInputField1 = document.createElement("input");
                 createTD1.appendChild(createInputField1);
                 createInputField1.setAttribute("type", "text");
-                createInputField1.setAttribute("name", pname);
+                createInputField1.setAttribute("name", 'pname[]');
                 createInputField1.setAttribute('class', 'pname form-control');
                 //for td 2 for Product Weight
                 const createInputField2 = document.createElement("input");
                 createTD2.appendChild(createInputField2);
                 createInputField2.setAttribute("type", "text");
-                createInputField2.setAttribute("name", pweight);
+                createInputField2.setAttribute("name", 'pweight[]');
                 createInputField2.setAttribute('class', 'pweight form-control');
                 //for td 3 or Product Price
                 const createInputField3 = document.createElement("input");
                 createTD3.appendChild(createInputField3);
                 createInputField3.setAttribute("type", "number");
-                createInputField3.setAttribute("name", pprice);
+                createInputField3.setAttribute("name", 'pprice[]');
                 createInputField3.setAttribute("class", "pprice form-control");
                 //for Delete Button or td six.
                 createTD4.style.textAlign = "center";
@@ -136,27 +136,18 @@
                 return createTR;
             }
             function addTableRowBtn() {
-                let pname = 'pname' + i;
-                let pweight = 'pweight' + i;
-                let pprice = 'pprice' + i;
-                i++;
-                const tableEle = creatTableEl(pname, pweight, pprice);
-
+                const tableEle = creatTableEl();
                 tbody.append(tableEle);
             }
             function Table() {
                 for (let y = 0; y < 4; y++) {
-                    let pname = 'pname' + y;
-                    let pweight = 'pweight' + y;
-                    let pprice = 'pprice' + y;
-                    const constTableEle = creatTableEl(pname, pweight, pprice);
+                    const constTableEle = creatTableEl();
                     tbody.append(constTableEle);
                 }
                 addBtn.addEventListener("click", addTableRowBtn);
             }
             Table();
             const generateOutputArray = () => Array.from(tbody.querySelectorAll('tr')).map(tr => ({
-
                 pprice: tr.querySelector('.pprice').value
             }));
             total = 0;

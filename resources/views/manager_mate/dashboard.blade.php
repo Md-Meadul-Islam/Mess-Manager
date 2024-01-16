@@ -2,7 +2,6 @@
 @section('manager_title', 'Manager | Dashboard')
 @section('manager_content')
 <div class="row">
-
   <!-- Left side columns -->
   <div class="col-lg-8">
     <div class="row">
@@ -10,9 +9,9 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">All Reports <span>/This Month</span></h5>
-            <div class="row">
+            <div class="row justify-content-center">
               {{-- In total meal --}}
-                <div class="col-xxl-6 col-md-12 col-lg-6">
+                <div class="col-xxl-6 col-md-6 col-sm-12">
                   <div class="card info-card sales-card align-items-center">
                     <div class="card-body text-center">
                       <h5 class="card-title">In-Total Meal <span>| this Month</span></h5>
@@ -41,7 +40,7 @@
                 </div>
                 {{-- end In total meal --}}
                 {{-- total bazar --}}
-                <div class="col-xxl-6 col-md-12 col-lg-6">
+                <div class="col-xxl-6 col-md-6 col-sm-12">
                   <div class="card info-card sales-card align-items-center">
                     <div class="card-body text-center">
                       <h5 class="card-title">In-Total Bazar <span>| this Month</span></h5>
@@ -65,10 +64,8 @@
                     </div>
                   </div>
                 </div>
-                 {{-- end total bazar --}}
-              <div class="row d-flex justify-content-center">
-                 {{-- meal rate --}}
-                <div class="col-xxl-6 col-md-12 col-lg-6">
+                {{-- meal rate --}}
+                <div class="col-xxl-6 col-md-6 col-sm-12">
                   <div class="card info-card sales-card align-items-center">
                     <div class="card-body">
                       <h5 class="card-title">Meal Rate <span>| this Month</span></h5>
@@ -168,15 +165,12 @@
                   </div>
                 </div>
                  {{--end meal rate --}}
-              </div>
-             
-             
+                 {{-- end total bazar --}}         
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
+    </div>    
   </div><!-- End Left side columns -->
 
   <!-- Right side columns -->
@@ -257,7 +251,7 @@
   </div><!-- End Right side columns -->
 
     <!-- Left side columns -->
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -265,8 +259,8 @@
               <h5 class="card-title">Details Report <span>/This Month</span></h5>
               <div class="row">
                 {{--details meal --}}
-                <div class="col-xxl-6 col-md-12 col-lg-6">
-                  <div class="card info-card sales-card">
+                <div class="col-xxl-4 col-md-6 col-sm-12">
+                  <div class="card info-card sales-card align-items-center">
                     <div class="card-body text-center">
                       <h5 class="card-title">Total Meal <span>| by RoomMates</span></h5>  
                       <div class="d-flex align-items-center">
@@ -293,8 +287,8 @@
                 </div>
                  {{--end details meal --}}
                 {{-- details bazar --}}
-                <div class="col-xxl-6 col-md-12 col-lg-6">
-                  <div class="card info-card sales-card">
+                <div class="col-xxl-4 col-md-6 col-sm-12">
+                  <div class="card info-card sales-card align-items-center">
                     <div class="card-body text-center">
                       <h5 class="card-title">Total Bazar <span>| by RoomMates</span></h5>
                       <div class="d-flex align-items-center">
@@ -313,37 +307,61 @@
                     </div>
                   </div>
                 </div>
-                {{-- end details bazar --}}
-              </div>
-              <div class="row d-flex justify-content-center">
-                {{-- roommates --}}
-                <div class="col-xxl-8 col-md-12 col-lg-6">
-                  <div class="card info-card sales-card align-items-center">
-                    <div class="card-body">
-                      <h5 class="card-title">RoomMates <span>| this Month</span></h5>
-                      <div class="d-flex align-items-center">
-                        <div class="ps-3 text-center">
-                          <a href="{{route('roommates.index')}}">
-                            <h6 style="color:#012970; font-weight:700; font-size:28px"><i class="bi bi-hearts"></i>
-                              0{{count($users)}}</h6>
-                          </a>
-                          <div class="col" style="margin-top:16px; text-align:center">
-                            @foreach ($users as $user)
-                            <span class="text-success small pt-1 fw-bold" style="text-wrap: nowrap">{{$user->name}}</span><br>
-                            @endforeach
-                          </div>
+                 {{-- roommates --}}
+              <div class="col-xxl-4 col-md-6 col-sm-12">
+                <div class="card info-card sales-card align-items-center">
+                  <div class="card-body">
+                    <h5 class="card-title">RoomMates <span>| this Month</span></h5>
+                    <div class="d-flex align-items-center">
+                      <div class="ps-3 text-center">
+                        <a href="{{route('roommates.index')}}">
+                          <h6 style="color:#012970; font-weight:700; font-size:28px"><i class="bi bi-hearts"></i>
+                            0{{count($users)}}</h6>
+                        </a>
+                        <div class="col" style="margin-top:16px; text-align:center">
+                          @foreach ($users as $user)
+                          <span class="text-success small pt-1 fw-bold" style="text-wrap: nowrap">{{$user->name}}</span><br>
+                          @endforeach
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                 {{-- end roommates --}}
               </div>
+               {{-- end roommates --}}
+                {{-- end details bazar --}}
+              </div>             
             </div>
           </div>
         </div>
       </div>
       
     </div><!-- End Left side columns -->
+</div>
+<div class="row" id="faq" name="faq">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">FAQ <span>/ Documentations</span></h5>
+          <div class="">
+            @php
+                $faqJson = File::get(base_path('public/JSON/faq.json'));
+                $faqData = json_decode($faqJson);
+            @endphp
+            @foreach ($faqData as $key=>$faq)
+            <div class="faq-content">
+              <div class="faq-header p-2">
+                <h4 style="position: relative">{!!__( $faq->title )!!}<span
+                    style="position: absolute; right:5px"><i class="fa-solid fa-angle-down"></i></span></h4>
+              </div>
+              <div class="faq-body pt-2">
+                <p>{!!__( $faq->body )!!}</p>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          </div>
+        </div>
+  </div>
 </div>
 @endsection

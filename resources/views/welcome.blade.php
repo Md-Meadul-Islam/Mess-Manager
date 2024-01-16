@@ -96,31 +96,32 @@
           </div>
         </div>
       </section>
-      <section>
-        
+      <section>        
         <div class="row">
           <div class="col-xxl-8 col-lg-6 col-md-12" id="doc" name="doc">
             <div class="card">           
-              <h1 class="text-center" style="font-family: cursive; font-weight:600; color:rgb(56, 88, 170)">Documentations</h1>
-              <div class="card m-2 p-3">
-                @php
-                    $faqJson = File::get(base_path('public/JSON/faq.json'));
-                    $faqData = json_decode($faqJson);
-                @endphp
-                @foreach ($faqData as $key=>$faq)
-                <div class="faq-content">
-                  <div class="faq-header p-2">
-                    <h4 style="position: relative">{!! $faq->title !!}<span
-                        style="position: absolute; right:5px"><i class="fa-solid fa-angle-down"></i></span></h4>
+              <div class="card-body">
+                <h5 class="card-title">FAQ <span>/ Documentations</span></h5>
+                <div class="">
+                  @php
+                      $faqJson = File::get(base_path('public/JSON/faq.json'));
+                      $faqData = json_decode($faqJson);
+                  @endphp
+                  @foreach ($faqData as $key=>$faq)
+                  <div class="faq-content">
+                    <div class="faq-header p-2">
+                      <h4 style="position: relative">{!!__($faq->title)!!}<span
+                          style="position: absolute; right:5px"><i class="fa-solid fa-angle-down"></i></span></h4>
+                    </div>
+                    <div class="faq-body pt-2">
+                      <p>{!!__($faq->body)!!}</p>
+                    </div>
                   </div>
-                  <div class="faq-body pt-2">
-                    <p>{!! $faq->body !!}</p>
-                  </div>
+                  @endforeach
                 </div>
-                @endforeach
               </div>
             </div>
-          </div>
+          </div>            
           <div class="col-xxl-4 col-lg-6 col-md-12" id="contact" name="contact">
             <div class="card">
               <h1 class="text-center" style="font-family: cursive; font-weight:600; color:rgb(56, 88, 170)">Contact</h1>
