@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class MealsTableController extends Controller
 {
@@ -90,21 +91,30 @@ class MealsTableController extends Controller
      */
     public function update(Request $request, string $column_name)
     {
-        for ($i = 0; $i < count($request->user_id); $i++) {
-            $meals = [];
-            array_push($meals, [$request->breakfast[$i], $request->lunch[$i], $request->dinner[$i]]);
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'breakfast.*' => ['required', 'integer', 'max:10'],
+            'lunch.*' => ['required', 'integer', 'max:10'],
+            'dinner.*' => ['required', 'integer', 'max:10'],
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        } else {
+            for ($i = 0; $i < count($request->user_id); $i++) {
+                $meals = [];
+                array_push($meals, [$request->breakfast[$i], $request->lunch[$i], $request->dinner[$i]]);
+                MealsTable::updateOrInsert([
+                    'user_id' => $request->user_id[$i],
+                    'month' => session('dates'),
+                    'batch' => $this->batch,
+                ], [
 
-            MealsTable::updateOrInsert([
-                'user_id' => $request->user_id[$i],
-                'month' => session('dates'),
-                'batch' => $this->batch,
-            ], [
-
-                $column_name => $meals[0],
-                'update_at' => now()->format('Ymd'),
-                'updated_at' => now(),
-            ]);
+                    $column_name => $meals[0],
+                    'update_at' => now()->format('Ymd'),
+                    'updated_at' => now(),
+                ]);
+            }
+            return redirect()->route('mealstable.index');
         }
-        return redirect()->route('mealstable.index');
     }
 }

@@ -15,12 +15,12 @@ return new class extends Migration {
             $table->text('user_id')->nullable();
             $table->string('month')->default(now()->format("M-Y"));
             $table->text('dailymeals')->default(0);
-            $table->bigInteger('totalmeals')->nullable();
+            $table->bigInteger('totalmeals')->default(0);
             $table->text('dailybazar')->default(0);
-            $table->bigInteger('totalbazar')->nullable();
-            $table->text('other_expence')->nullable();
-            $table->bigInteger('expence_total')->nullable();
-            $table->float('meal_rate')->nullable();
+            $table->bigInteger('totalbazar')->default(0);
+            $table->text('other_expence')->default(0);
+            $table->bigInteger('expence_total')->default(0);
+            $table->float('meal_rate')->default(0);
             $table->string('batch')->nullable();
             $table->timestamps();
         });

@@ -106,8 +106,10 @@ class ManagerMateController extends Controller
             foreach ($allMeals as $value) {
                 $totalMeals += $value;
             }
-
             $allbazar = BazarsTable::where('batch', $this->batch)->where('status', true)->whereMonth('date', (int) $sessionDate->month)->groupBy('user_id')->select('user_id', \DB::raw('SUM(total) as total'))->get();
+
+            $monthlyDetails = MonthlyTable::where('batch', $this->batch)->where("month", session('dates'))->first();
+            $mealRate = ($totalbazar + $monthlyDetails->expence_total) / $totalMeals;
             MonthlyTable::updateOrInsert(
                 [
                     'batch' => $this->batch,
@@ -118,12 +120,11 @@ class ManagerMateController extends Controller
                     'totalmeals' => $totalMeals,
                     'dailybazar' => json_encode($allbazar),
                     'totalbazar' => $totalbazar,
+                    'meal_rate' => $mealRate,
                     'batch' => $this->batch
                 ],
             );
         }
-        $monthlyDetails = MonthlyTable::where('batch', $this->batch)->where("month", session('dates'))->first();
-
         return view('manager_mate.dashboard', compact('users', 'bazarsArr', 'allMeals', 'monthlyDetails'));
     }
     public function otherExpences(Request $request, $id)
@@ -140,17 +141,10 @@ class ManagerMateController extends Controller
                 'eprice' => $Eprice
             ];
             $monthly_expences = MonthlyTable::find($id);
-            $grandTotal = $monthly_expences->totalbazar + $monthly_expences->expence_total;
-            $mealRate = $grandTotal / $monthly_expences->totalmeals;
             $monthly_expences->other_expence = json_encode($detailsArray);
             $monthly_expences->expence_total = $summation;
-            $monthly_expences->meal_rate = $mealRate;
             $monthly_expences->save();
         }
         return redirect()->route('manager_mate.dashboard');
-    }
-    public function faq()
-    {
-        return view('manager_mate.faq');
     }
 }

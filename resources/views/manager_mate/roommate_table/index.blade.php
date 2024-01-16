@@ -25,26 +25,31 @@
               @foreach ($mates as $mate)
                 <div class="col-xxl-4 col-md-6 col-lg-4 my-3">
                   <div class="card info-card sales-card align-items-center">
-                    <div class="card-body">
-                      <div class="card-body">
-                        <div class="mt-4">
+                    <div style="padding:10px; width:100%">
+                        <div class="mt-0">
                             <p style="text-align:center"><img src="{{asset('uploads')}}/profile_img/{{$mate->photo}}"
-                                alt="Profile" class="rounded-circle " style="width:200px; height:200px; border:5px  solid rgb(167, 155, 155);box-shadow:0 5px 15px black"></p>
+                                alt="Profile" class="rounded-circle " style="width:200px; height:200px;box-shadow:5px 5px 0 rgb(97, 95, 95)"></p>
                         </div>
-                        @if (Auth::user()->role === 'manager')
-                        <div class="text-center">
+                        <div>
                           <p><span class="btn btn-outline-success me-2" title="Name"><i class="fa-solid fa-signature"></i></span>{{$mate->name}}</p>
                           <p><span class="btn btn-outline-success me-2" title="Email"><i class="fa-solid fa-envelope"></i></span>{{$mate->email}}</p>
                           <p><span class="btn btn-outline-success me-2" title="Phone"><i class="fa-solid fa-phone"></i></span>{{$mate->phone}}</p>
-                          <p><span class="btn btn-outline-success me-2" title="Active from"><i class="bi bi-person-plus-fill"></i></span>{{$mate->created_at}}</p>
+                          <p>
+                            <span class="btn btn-outline-success me-2" title="Active from">
+                              <i class="bi bi-person-plus-fill"></i>
+                              @php
+                                  $date = Carbon\Carbon::createFromFormat('Ymd', $mate->create_at);
+                                  $monthYear= $date->format('F Y');
+                              @endphp
+                            </span>{{$monthYear}}</p>
                           <p><span class="btn btn-outline-success me-2" title="Status"><i class="bi bi-person-fill-gear"></i></span>{{$mate->status}}</p>
-                          <div class="text-center">
-                            <a href="{{route('roommates.edit',$mate->id)}}" title="Edit (status, name etc.)" class="btn btn-secondary btn-outline-info px-5"><i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                          </div>
                       </div>
-                        @endif
-                    </div>
+                      @if (Auth::user()->role === 'manager')
+                        <div class="text-center">
+                          <a href="{{route('roommates.edit',$mate->id)}}" title="Edit (status, name etc.)" class="btn btn-secondary btn-outline-info px-5"><i class="fa-solid fa-pen-to-square"></i>
+                          </a>
+                        </div>
+                      @endif
                     </div>
                   </div>
                 </div>

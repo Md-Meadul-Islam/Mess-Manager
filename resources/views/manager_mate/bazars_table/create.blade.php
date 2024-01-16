@@ -85,7 +85,7 @@
             let addBtn = document.querySelector('#add-button-row');
             let outputButton = document.querySelector('#output-button');
             let i = 4;
-            function creatTableEl(pname, pweight, pprice) {
+            function creatTableEl() {
                 const createTR = document.createElement("tr");
                 tbody.appendChild(createTR);
                 const createTD1 = document.createElement("td");
@@ -97,19 +97,19 @@
                 const createInputField1 = document.createElement("input");
                 createTD1.appendChild(createInputField1);
                 createInputField1.setAttribute("type", "text");
-                createInputField1.setAttribute("name", pname);
+                createInputField1.setAttribute("name", 'pname[]');
                 createInputField1.setAttribute('class', 'pname form-control');
                 //for td 2 for Product Weight
                 const createInputField2 = document.createElement("input");
                 createTD2.appendChild(createInputField2);
                 createInputField2.setAttribute("type", "text");
-                createInputField2.setAttribute("name", pweight);
+                createInputField2.setAttribute("name", 'pweight[]');
                 createInputField2.setAttribute('class', 'pweight form-control');
                 //for td 3 or Product Price
                 const createInputField3 = document.createElement("input");
                 createTD3.appendChild(createInputField3);
                 createInputField3.setAttribute("type", "number");
-                createInputField3.setAttribute("name", pprice);
+                createInputField3.setAttribute("name", 'pprice[]');
                 createInputField3.setAttribute("class", "pprice form-control");
                 //for Delete Button or td six.
                 createTD4.style.textAlign = "center";
@@ -136,19 +136,12 @@
                 return createTR;
             }
             function addTableRowBtn() {
-                let pname = 'pname' + i;
-                let pweight = 'pweight' + i;
-                let pprice = 'pprice' + i;
-                i++;
-                const tableEle = creatTableEl(pname, pweight, pprice);
+                const tableEle = creatTableEl();
                 tbody.append(tableEle);
             }
             function Table() {
                 for (let y = 0; y < 4; y++) {
-                    let pname = 'pname' + y;
-                    let pweight = 'pweight' + y;
-                    let pprice = 'pprice' + y;
-                    const constTableEle = creatTableEl(pname, pweight, pprice);
+                    const constTableEle = creatTableEl();
                     tbody.append(constTableEle);
                 }
                 addBtn.addEventListener("click", addTableRowBtn);
