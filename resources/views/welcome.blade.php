@@ -85,12 +85,25 @@
                 </div>
               </div>
               <div class="col-xxl-6 col-lg-6 col-md-12 d-flex">
-                <div class="video-wrapper">                  
-                   <div id="IVideo">
-                    {{-- <iframe src="https://drive.google.com/file/d/10VE82jQq9xVXqM2ozRDw9cMYuhmpiIQ5/preview" width="580"height="350" allow="autoplay"></iframe> --}}
-                    <iframe src="https://drive.google.com/file/d/1Ggdsw8GII3iTUFvhIlvgmM-Eq00tC3hn/preview" allow="autoplay" ></iframe>
-                   </div>
+                <div class="video-wrapper">  
+                  <video controls muted>
+                    <source src="{{asset('frontend')}}/files/Mess_Manager_intro.webm">
+                  </video>                
+                   {{-- <div id="IVideo">
+                    <iframe src="https://drive.google.com/file/d/1Ggdsw8GII3iTUFvhIlvgmM-Eq00tC3hn/preview" allow="autoplay" ></iframe>                    
+                   </div> --}}
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="row">
+          <div class="col-12">
+            <div class="">
+              <div class="card-body">
+                <h2 class="text-center" style="font-family: fantasy,cursive; letter-spacing:1px; color:rgb(125, 151, 141);">{{__('If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. Many things have to be calculated in the mess like Meal calculation, Bazar calculation, monthly Expenses, Other expenses like (Gas bill, Water bill), mess members leaving the mess and new members joining. You can calculate everything in this one App.')}}</h2>
               </div>
             </div>
           </div>
@@ -101,7 +114,7 @@
           <div class="col-xxl-8 col-lg-6 col-md-12" id="doc" name="doc">
             <div class="card">           
               <div class="card-body">
-                <h5 class="card-title">FAQ <span>/ Documentations</span></h5>
+                <h5 class="card-title" style="font-family: fantasy;">FAQ <span>/ Documentations</span></h5>
                 <div class="">
                   @php
                       $faqJson = File::get(base_path('public/JSON/faq.json'));
@@ -124,7 +137,7 @@
           </div>            
           <div class="col-xxl-4 col-lg-6 col-md-12" id="contact" name="contact">
             <div class="card">
-              <h1 class="text-center" style="font-family: cursive; font-weight:600; color:rgb(56, 88, 170)">Contact</h1>
+              <h1 class="text-center" style="font-family: fantasy; color:rgb(125, 151, 141);">Contact</h1>
               <div class="card m-2">
                 <div class="input-group p-2">
                   <div class="input-group-prepend">
