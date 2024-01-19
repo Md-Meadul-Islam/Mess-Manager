@@ -88,10 +88,7 @@
                 <div class="video-wrapper">  
                   <video controls muted>
                     <source src="{{asset('frontend')}}/files/Mess_Manager_intro.webm">
-                  </video>                
-                   {{-- <div id="IVideo">
-                    <iframe src="https://drive.google.com/file/d/1Ggdsw8GII3iTUFvhIlvgmM-Eq00tC3hn/preview" allow="autoplay" ></iframe>                    
-                   </div> --}}
+                  </video>
                 </div>
               </div>
             </div>

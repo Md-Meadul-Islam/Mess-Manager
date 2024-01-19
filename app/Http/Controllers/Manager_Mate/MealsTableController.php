@@ -7,6 +7,7 @@ use App\Models\MealsTable;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -98,7 +99,9 @@ class MealsTableController extends Controller
             'dinner.*' => ['required', 'integer', 'max:10'],
         ]);
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            $errors = $validator->errors()->all();
+            $updateErrors = Arr::flatten($errors);
+            return back()->with('errors', $updateErrors);
         } else {
             for ($i = 0; $i < count($request->user_id); $i++) {
                 $meals = [];
@@ -114,7 +117,7 @@ class MealsTableController extends Controller
                     'updated_at' => now(),
                 ]);
             }
-            return redirect()->route('mealstable.index');
+            return redirect()->route('mealstable.index')->with('success', 'Meals Updated Successfully !');
         }
     }
 }

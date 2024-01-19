@@ -203,7 +203,6 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-signature"></i></span>
                 <input type="text" name="name" class="form-control" id="name" required autofocus autocomplete="name"
                   value="{{Auth::user()->name}}">
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -212,7 +211,6 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-envelope"></i></span>
                 <input type="username" name="username" class="form-control" id="username" autocomplete="username"
                   value="{{Auth::user()->username}}">
-                <x-input-error :messages="$errors->get('username')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -221,7 +219,6 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-envelope"></i></span>
                 <input type="email" name="email" class="form-control" id="email" autocomplete="email"
                   value="{{Auth::user()->email}}">
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -230,16 +227,13 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
                 <input type="text" name="phone" class="form-control" id="phone" required autocomplete="phone"
                   value="{{Auth::user()->phone}}">
-                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
               <label for="photo" class="form-label"><strong>Profile Photo</strong></label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-image"></i></span>
-
                 <input type="file" name="photo" class="form-control" id="photo">
-                <x-input-error :messages="$errors->get('photo')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -250,7 +244,6 @@
                   <option value="manager">manager</option>
                   <option value="mate">mate</option>
                 </select>
-                <x-input-error :messages="$errors->get('role')" class="mt-2" />
               </div>
             </div>
             <div class="modal-footer">
