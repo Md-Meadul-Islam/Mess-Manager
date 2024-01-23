@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=0, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, user-scalable=0, minimal-ui">
     <meta name="description" content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. Many things have to be calculated in the mess like Meal calculation, Bazar calculation, monthly Expenses, Other expenses like (Gas bill, Water bill), mess members leaving the mess and new members joining. You can calculate everything in this one App.">
     <meta name="keywords" content="mess, mess manager, mess apps,mess life, mess organize, room, roommate, roommates, room-mate, manager, member, blooms, blooms-ai.com, ">
     <meta name="author" content="Blooms-AI">
