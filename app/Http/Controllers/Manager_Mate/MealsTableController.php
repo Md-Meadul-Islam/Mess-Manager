@@ -79,11 +79,13 @@ class MealsTableController extends Controller
     {
         $column_name = 'day_' . $column;
         $users = User::where('batch', $this->batch)->where('status', 'active')->get();
-        if (Auth::user()->role == 'manager' && MealsTable::first($column_name)->$column_name == null) {
-            $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
+        $mealTableArray = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
+        if (Auth::user()->role == 'manager' && $mealTableArray[0]->$column_name == null) {
+            $mealTableEdit = $mealTableArray;
         } elseif (Auth::user()->role == 'manager' && $column > (int) date('d') - 7) {
-            $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
+            $mealTableEdit = $mealTableArray;
         }
+
         return view('manager_mate.meals_table.edit', compact('mealTableEdit', 'column_name'));
     }
 

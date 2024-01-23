@@ -28,62 +28,45 @@
 
             <form action="{{route('register')}}" method="POST" class="row g-3" enctype="multipart/form-data">
               @csrf
-
               <div class="col-12">
                 <label for="name" class="form-label"><strong>Name</strong><span style="color:red"> *</span></label>
-                <div class="input-group has-validation">
+                <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-signature"></i></span>
                   <input type="text" name="name" class="form-control" id="name" required autofocus autocomplete="name">
                 </div>
               </div>
               <div class="col-12">
                 <label for="email" class="form-label"><strong>E-mail</strong></label>
-                <div class="input-group has-validation">
+                <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-envelope"></i></span>
                   <input type="email" name="email" class="form-control" id="email" autocomplete="email">
                 </div>
               </div>
-
+              <?php 
+              
+              $user_ip = getenv('REMOTE_ADDR');
+              $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
+              $phoneUtil = libphonenumber\PhoneNumberUtil::getInstance();
+              $phoneNumber = $phoneUtil->getExampleNumberForType($geo['geoplugin_countryCode'], libphonenumber\PhoneNumberType::MOBILE);
+              $dialCode = '+' . $phoneNumber->getCountryCode();
+              ?>
               <div class="col-12">
-                <label for="phone" class="form-label"><strong>Phone</strong><span style="color:red; text-align:right">
+                <label for="phone" class="form-label"><strong>Mobile</strong><span style="color:red; text-align:right">
                     *</span></label>
-                <div class="input-group has-validation">
-                  <input type="tel" name="phone" class="form-control" id="phone" required autocomplete="phone">
+                <div class="input-group">
+                  <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
+                  <input type="text" name="phone" class="form-control" id="phone" required autocomplete="phone" value="{{$dialCode}}">
                 </div>
               </div>
-              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
-              <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
-              <script>
-                function httpGetAsync(url, callback){
-                  var xmlHttp = new XMLHttpRequest();
-                  xmlHttp.onreadystatechange = function() {
-                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                      callback(xmlHttp.responseText);
-                  }
-                  xmlHttp.open("GET", url, true); // true for asynchronous
-                  xmlHttp.send(null);
-                }
-                httpGetAsync('https://ipinfo.io/json', function(response) {
-                  var data = JSON.parse(response);
-                  
-                });
-                // $user_ip = getenv('REMOTE_ADDR');
-                // $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
-                const input = document.querySelector("#phone");
-                    window.intlTelInput(input, {
-                    initialCountry: "bd",
-                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-                  });
-              </script>
               <div class="col-12">
                 <label for="photo" class="form-label"><strong>Profile Photo</strong></label>
-                <div class="input-group has-validation">
+                <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-image"></i></span>
                   <input type="file" name="photo" class="form-control" id="photo">
                 </div>
               </div>
               <div class="col-12">
-                <label for="usertype" class="form-label"><strong>Accout Type</strong></label>
+                <label for="usertype" class="form-label"><strong>Account Type</strong></label>
                 <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-user-tie"></i></span>
                   <select name="role" id="role" class="form-select">
@@ -95,7 +78,7 @@
               <div id="typeselectoption" class="hidden">
                 <div class="col-12">
                   <label for="email2" class="form-label"><strong>Manager's E-mail</strong></label>
-                  <div class="input-group has-validation">
+                  <div class="input-group">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="fa-regular fa-envelope"></i></span>
                     <input type="email" name="email2" class="form-control" id="email2" autocomplete="email">
                   </div>
@@ -103,7 +86,7 @@
                 <div class="col-12">
                   <label for="phone2" class="form-label"><strong>Manager's Phone</strong><span
                       style="color:red; text-align:right"> *</span></label>
-                  <div class="input-group has-validation">
+                  <div class="input-group">
                     <span class="input-group-text" id="inputGroupPrepend"><i
                         class="fa-solid fa-phone-volume"></i></span>
                     <input type="text" name="phone2" class="form-control" id="phone2" autocomplete="phone">
@@ -127,7 +110,7 @@
               <div class="col-12">
                 <label for="password" class="form-label"><strong>New Password</strong><span style="color:red">
                     *</span></label>
-                <div class="input-group has-validation">
+                <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-lock-open"></i></span>
                   <input type="password" name="password" class="form-control" id="password" required
                     autocomplete="new-password">
@@ -136,7 +119,7 @@
               <div class="col-12">
                 <label for="password_confirmation" class="form-label"><strong>Confirm Password</strong><span
                     style="color:red"> *</span></label>
-                <div class="input-group has-validation">
+                <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-unlock"></i></span>
                   <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
                     required autocomplete="new-password">

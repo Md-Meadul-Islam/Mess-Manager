@@ -329,45 +329,14 @@
                 </div>
               </div>
                {{-- end roommates --}}
-               {{-- start Debit and Credits --}}
-               <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Debits & Credits <span>| this Month</span></h5>
-                    <table class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Bazars</th>
-                          <th>Meals</th>
-                          <th>Meal Rate</th>
-                          <th>Other Ex.</th>
-                          <th>Meal wise Cost</th>
-                          <th>Due</th>
-                          <th>Over Ex.</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th>Name</th>
-                          <th>Bazars</th>
-                          <th>Meals</th>
-                          <th>Meal Rate</th>
-                          <th>Other Ex.</th>
-                          <th>Meal wise Cost</th>
-                          <th>Due</th>
-                          <th>Over Ex.</th>
-                        </tr>
-                      </tfoot>
-                    </table>
+              </div>
+              {{-- <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <h1 class="card-header">Debits & Credits</h1>
                   </div>
                 </div>
-               </div>
-               {{-- Debit and Credits --}}
-              </div>             
+                </div>            --}}
             </div>
           </div>
         </div>

@@ -109,6 +109,7 @@
                 const createInputField3 = document.createElement("input");
                 createTD3.appendChild(createInputField3);
                 createInputField3.setAttribute("type", "number");
+                createInputField3.setAttribute("step", "any");
                 createInputField3.setAttribute("name", 'pprice[]');
                 createInputField3.setAttribute("class", "pprice form-control");
                 //for Delete Button or td six.

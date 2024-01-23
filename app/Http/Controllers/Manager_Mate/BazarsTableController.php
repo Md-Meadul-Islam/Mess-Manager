@@ -44,15 +44,13 @@ class BazarsTableController extends Controller
         $validator = Validator::make($request->all(), [
             'date' => 'required',
             'user_id' => 'required',
-            'pname.*' => ['required', 'string', 'max:100', 'regex:/^[\-_]+$/u'],
-            'pweight.*' => ['string', 'max:10', 'regex:/^[\-_.]+$/u'],
-            'pprice.*' => ['required', 'integer', 'max:5000'],
+            'pname.*' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\d]+(?:[-_][a-zA-Z\d]+)?$/u'],
+            'pweight.*' => ['string', 'max:20'],
+            'pprice.*' => ['required', 'numeric', 'max:5000'],
         ], [
-            'pname.*' => 'You can\'t add space and typed more than 100 digits for :attribute!',
             'pweight.*.max' => 'Max digits should be less than :max for :attribute!',
-            'pweight.*.regex' => 'Invalid characters for :attribute!',
             'pprice.*.required' => 'The :attribute field is required.',
-            'pprice.*.integer' => 'The :attribute must be an integer.',
+            'pprice.*.numeric' => 'The :attribute must be an numeric.',
             'pprice.*.max' => 'Value should be less than or equal to :max for :attribute!',
         ], [
             'pname.*' => 'product_Name',
@@ -161,11 +159,11 @@ class BazarsTableController extends Controller
             $statusFind->status = true;
             $statusFind->save();
         }
-        return redirect()->route('bazarstable.index');
+        return redirect()->route('bazarstable.index')->with('Success', 'Successfully Accecpt Bazars');
     }
     public function destroy(string $id)
     {
         BazarsTable::find($id)->delete();
-        return redirect()->route('bazarstable.index');
+        return redirect()->route('bazarstable.index')->with('Success', 'Successfully Deleted Bazar');
     }
 }

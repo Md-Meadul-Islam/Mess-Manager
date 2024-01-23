@@ -21,7 +21,7 @@
                     @csrf
                     <div class="col-12">
                       <label for="login" class="form-label"><strong>Email / Phone</strong></label>
-                      <div class="input-group has-validation">
+                      <div class="input-group">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-signature"></i></span>
                         <input type="text" name="login" class="form-control" id="login" required autofocus
                           autocomplete="username" placeholder="Input Email / Phone...">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-12">
                       <label for="password" class="form-label"><strong>Password</strong></label>
-                      <div class="input-group has-validation">
+                      <div class="input-group">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-unlock"></i></span>
                         <input type="password" name="password" class="form-control" id="password"
                           placeholder="Input Password" required>
