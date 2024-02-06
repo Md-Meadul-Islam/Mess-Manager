@@ -4,8 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Manager_Mate\BazarsTableController;
 use App\Http\Controllers\Manager_Mate\MealsTableController;
 use App\Http\Controllers\Manager_Mate\RoommateController;
+use App\Http\Controllers\Manager_Mate\ToletController;
 use App\Http\Controllers\ManagerMateController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 // frontend 
@@ -18,15 +20,16 @@ Route::get('/config-cache', function () {
     Artisan::call('optimize:clear');
     return "<h1>Cache Cleared!</h1>";
 });
-Route::get('/db-seed', function () {
-    // Artisan::call('db:seed');
-    Artisan::call('migrate');
-
-    return "<h1>Success!</h1>";
+Route::get('/linkstorage', function () {
+    $targetFolder = base_path() . '/storage/app/public';
+    $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/symstorage';
+    symlink($targetFolder, $linkFolder);
 });
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
+Route::post('/viewtolet', [WelcomeController::class, 'viewTolet'])->name('viewtolet');
+Route::post('/maketolet', [WelcomeController::class, 'makeTolet'])->name('maketolet');
+Route::get('/searchkey', [WelcomeController::class, 'searchKey'])->name('searchKey');
+Route::post('/searchtolet', [WelcomeController::class, 'searchTolet'])->name('searchtolet');
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('dashboard', [AdminController::class, 'Index'])->name('admin.dashboard');
 });

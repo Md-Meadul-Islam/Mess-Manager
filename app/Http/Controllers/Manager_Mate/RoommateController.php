@@ -81,6 +81,8 @@ class RoommateController extends Controller
             'phone' => $request->phone,
             'role' => 'mate',
             'batch' => $batch,
+            'create_at' => now()->format('Ymd'),
+            'created_at' => now()->format("Ymd"),
         ]);
 
         event(new Registered($user));
@@ -125,6 +127,8 @@ class RoommateController extends Controller
         $mates->phone = $phone;
         $mates->photo = $imageName;
         $mates->status = $request->status;
+        $mates->update_at = now()->format('Ymd');
+        $mates->updated_at = now();
         $mates->save();
         return redirect()->route('roommates.index');
     }

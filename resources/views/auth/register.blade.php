@@ -62,7 +62,7 @@
                 <label for="photo" class="form-label"><strong>Profile Photo</strong></label>
                 <div class="input-group">
                   <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-image"></i></span>
-                  <input type="file" name="photo" class="form-control" id="photo">
+                  <input type="file" name="photo" class="form-control" id="photo" accept="image/*">
                 </div>
               </div>
               <div class="col-12">

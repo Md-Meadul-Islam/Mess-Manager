@@ -68,7 +68,7 @@ class RegisteredUserController extends Controller
                     'password' => Hash::make($request->password),
                     'batch' => $request->phone,
                     'create_at' => $DateNow,
-                    'update_at' => $DateNow,
+                    'created_at' => now(),
                 ]);
                 event(new Registered($user));
                 session()->put('dates', now()->format('M-Y'));
@@ -85,7 +85,7 @@ class RegisteredUserController extends Controller
                     'role' => $request->role,
                     'batch' => $request->phone2,
                     'create_at' => $DateNow,
-                    'update_at' => $DateNow,
+                    'created_at' => now(),
                 ]);
                 event(new Registered($user));
                 session()->put('dates', now()->format('M-Y'));

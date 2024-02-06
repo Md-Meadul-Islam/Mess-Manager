@@ -11,7 +11,7 @@
                   <img src="{{asset('backend')}}/img/logo.png" alt="">
                   <span class="d-none d-lg-block">Mess Manager</span>
                 </a>
-              </div><!-- End Logo -->
+              </div>
               <div class="card mb-3">
                 <div class="card-body">
                   <div class="pt-4 pb-2">
