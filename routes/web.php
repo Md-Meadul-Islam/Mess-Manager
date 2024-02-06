@@ -26,7 +26,7 @@ Route::get('/linkstorage', function () {
     symlink($targetFolder, $linkFolder);
 });
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
-Route::post('/viewtolet', [WelcomeController::class, 'viewTolet'])->name('viewtolet');
+Route::get('/viewtolet', [WelcomeController::class, 'viewTolet'])->name('viewtolet');
 Route::post('/maketolet', [WelcomeController::class, 'makeTolet'])->name('maketolet');
 Route::get('/searchkey', [WelcomeController::class, 'searchKey'])->name('searchKey');
 Route::post('/searchtolet', [WelcomeController::class, 'searchTolet'])->name('searchtolet');

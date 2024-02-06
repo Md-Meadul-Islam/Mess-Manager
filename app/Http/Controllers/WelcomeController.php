@@ -32,7 +32,7 @@ class WelcomeController extends Controller
                 $q->where('address', 'like', '%' . $query . '%');
             });
         }
-        $tolets = $tolets->paginate(10);
+        $tolets = $tolets->paginate(12);
         if ($tolets->count() >= 1) {
             $htmlTolets = view('tolets.viewtolet', compact('tolets'))->render();
             return response()->json(['village' => $village, 'city' => $city, 'town' => $town, 'tolets' => $htmlTolets]);
@@ -100,14 +100,14 @@ class WelcomeController extends Controller
             $tolets = Tolets::where('title', 'like', '%' . $request->searchString . '%')
                 ->orwhere('address', 'like', '%' . $request->searchString . '%')
                 ->orwhere('details', 'like', '%' . $request->searchString . '%')
-                ->latest()->paginate(10);
+                ->latest()->paginate(12);
             if ($tolets->count() >= 1) {
                 return view('tolets.viewtolet', compact('tolets'))->render();
             } else {
                 return '<span style="color:red;text-align:center;">Nothing Found for- ' . $request->searchString . '! Sorry.</span>';
             }
         } elseif ($request->searchString == null) {
-            $tolets = Tolets::latest()->paginate(10);
+            $tolets = Tolets::latest()->paginate(12);
             return view('tolets.viewtolet', compact('tolets'))->render();
         } else {
             return response()->json(['error' => 'You can search with letters and spaces for all languages.'], 422);

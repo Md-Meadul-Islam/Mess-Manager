@@ -142,7 +142,7 @@
             </div>
             <div class="col-md-6 col-sm-12 text-start align-items-center">
               <div>
-                <p class="text-start">Results produced based on Your Area: </p>
+                <p class="text-start">Result produce based on Your Area by default </p>
               </div>
               <div class="d-flex align-items-center">
                 <p class="village btn btn-outline-success m-1"></p>
@@ -246,8 +246,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="row viewtolets d-flex">Loading...
-                </div>
+                <div class="toletsdiv">
+                  <div class="row viewtolets d-flex"></div>
+                </div>               
               </div>
             </div>
           </div>

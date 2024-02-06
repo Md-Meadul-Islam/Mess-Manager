@@ -19,7 +19,7 @@
                 $('.city').text(city);
                 $.ajax({
                     url:"{{route('viewtolet')}}",
-                    method: "POST",
+                    method: "GET",
                     data:{village:village, town:town, city:city, country:country},
                     success:function(res){
                         $('.village').text(res.village);
@@ -35,7 +35,7 @@
         },()=>{
             $.ajax({
                     url:"{{route('viewtolet')}}",
-                    method: "POST",
+                    method: "GET",
                     success:function(res){
                         $('.village').text(res.village);
                         $('.town').text(res.town);
@@ -89,8 +89,7 @@
                 processData: false,
                 success: function (res) {
                     $('.addtolet').removeClass('show');
-                    toastr.success(res.message, 'Success');
-                    $('.viewtolets').load();
+                    toastr.success(res.message, 'Success');                    
                     toastr.options = {
                         "closeButton": true,
                         "debug": true,

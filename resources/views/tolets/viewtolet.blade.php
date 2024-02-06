@@ -35,6 +35,11 @@
 </div>
 @endforeach
 @endif
+<div class="row">
+    <div class="col-12">
+        {{ $tolets->links() }}
+    </div>
+</div>
 <script>
     $(document).ready(function () {
          $('.carousel').each(function () {
