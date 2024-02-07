@@ -2,42 +2,19 @@
 
 ## About Mess Manager
 
+##Purposes: 
+If you are staying in a rented room and there many room-mates under one room manager, you can use this application to maintain all room-mates meals and bazar lists. In this application have Meals Table that contain all room-mates with manager's daily meal list (like breakfast, lunch, dinner), you can just edit and update a specific date's meal data to store record. And have Bazar Table that contain all bazar list in-details(product_name, weight, price) and totals for a specific mates/users. Finally, in Dashboard page's you can view total-meals, total-bazars, all room-mates of a month.
 
-## Key Features
+ Develop a Mess Manager application using bootstrap and custom JavaScript for responsive and modern UI design. In Backend I use Laravel with blade. Used Laravel Breeze package as authentication system for registration and login.
+ 
+##Key Features: 
+By Default, every user will be manager/roommate when they registered for the first time. a user can select his role in a room/mess. If selected role is roommate, then user must be give their manager email and phone for connect with manager.
+In my application Manager is Administrator of a room/mess. He can see all roommates for a selected month and can change the roommate’s role from manager to roommate. Only he can Update or edit or delete Meal data and Bazars data. Roommate only view their Meal/Bazars data, for modification(update/edit) he can send request to the manager for modification’s.
+    #Dashboard: 
+     1. You can view monthly reports of bazar list, meal list and add other expenses (like: gas-bill, water-bill, etc.).
+     2.You can view monthly details of total bazar, meal, room-mate.
+    #Meal Details:
+    If you are log in as manager you can view all roommates meal details. and edit and update. No need to create new meal for a date because you find all date's row for a          month in there. If you log in as room-mates you can only view you meal data and cannot edit/update, you can send request message for changing you meal data to your manager.
+##Link: Live Site || 
+##Technologies: HTML5, CSS3, JavaScript, PHP, Laravel, MySQL, Bootstrap.
 
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
