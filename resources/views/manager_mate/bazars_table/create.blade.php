@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class=" d-flex">
-                            <div class="col-lg-6 ">
+                            <div class="col-12">
                                 <h1 class="card-title"> Add New Bazar</h1>
                             </div>
                         </div>
@@ -109,6 +109,7 @@
                 const createInputField3 = document.createElement("input");
                 createTD3.appendChild(createInputField3);
                 createInputField3.setAttribute("type", "number");
+                createInputField3.setAttribute("step", "any");
                 createInputField3.setAttribute("name", 'pprice[]');
                 createInputField3.setAttribute("class", "pprice form-control");
                 //for Delete Button or td six.

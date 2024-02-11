@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\BazarsTable;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class BazarsTableController extends Controller
@@ -42,12 +44,23 @@ class BazarsTableController extends Controller
         $validator = Validator::make($request->all(), [
             'date' => 'required',
             'user_id' => 'required',
-            'pname.*' => ['required', 'string', 'max:20', 'regex:/^[\p{L}\-_]+$/u'],
-            'pweight.*' => ['string', 'max:10', 'regex:/^[\p{L}\p{N}\-_.]+$/u'],
-            'pprice.*' => ['required', 'integer', 'max:5000'],
+            'pname.*' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\d]+(?:[-_][a-zA-Z\d]+)?$/u'],
+            'pweight.*' => ['string', 'max:20'],
+            'pprice.*' => ['required', 'numeric', 'max:5000'],
+        ], [
+            'pweight.*.max' => 'Max digits should be less than :max for :attribute!',
+            'pprice.*.required' => 'The :attribute field is required.',
+            'pprice.*.numeric' => 'The :attribute must be an numeric.',
+            'pprice.*.max' => 'Value should be less than or equal to :max for :attribute!',
+        ], [
+            'pname.*' => 'product_Name',
+            'pweight.*' => 'product_Weight',
+            'pprice.*' => 'product_Price',
         ]);
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            $errors = $validator->errors()->all();
+            $flattenedErrors = Arr::flatten($errors);
+            return back()->with('errors', $flattenedErrors);
         } else {
             $user_id = $request->user_id;
             $pnames = $request->pname;
@@ -78,7 +91,7 @@ class BazarsTableController extends Controller
             $shopping->updated_at = null;
             $shopping->save();
         }
-        return redirect()->route('bazarstable.index');
+        return redirect()->route('bazarstable.index')->with('success', 'Bazars Added Successful !');
     }
     public function edit(string $id)
     {
@@ -88,39 +101,56 @@ class BazarsTableController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'date' => 'required',
             'user_id' => 'required',
-            'pname.*' => ['required', 'string', 'max:20', 'regex:/^[\p{L}\-_]+$/u'],
-            'pweight.*' => ['string', 'max:10', 'regex:/^[\p{L}\p{N}\-_.]+$/u'],
+            'pname.*' => ['required', 'string', 'max:20', 'regex:/^[\-_]+$/u'],
+            'pweight.*' => ['string', 'max:10', 'regex:/^[\-_.]+$/u'],
             'pprice.*' => ['required', 'integer', 'max:5000'],
+        ], [
+            'pname.*' => 'You can\'t add space and typed more than 100 digits for :attribute!',
+            'pweight.*.max' => 'Max digits should be less than :max for :attribute!',
+            'pweight.*.regex' => 'Invalid characters for :attribute!',
+            'pprice.*.required' => 'The :attribute field is required.',
+            'pprice.*.integer' => 'The :attribute must be an integer.',
+            'pprice.*.max' => 'Value should be less than or equal to :max for :attribute!',
+        ], [
+            'pname.*' => 'product_Name',
+            'pweight.*' => 'product_Weight',
+            'pprice.*' => 'product_Price',
         ]);
-        $user_id = $request->user_id;
-        $pnames = $request->pname;
-        $pweights = $request->pweight;
-        $pprices = $request->pprice;
-        $summation = 0;
-        for ($y = 0; $y < count($pprices); $y++) {
-            $summation += (int) $pprices[$y];
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+            $updateErrors = Arr::flatten($errors);
+            return back()->with('errors', $updateErrors);
+        } else {
+            $user_id = $request->user_id;
+            $pnames = $request->pname;
+            $pweights = $request->pweight;
+            $pprices = $request->pprice;
+            $summation = 0;
+            for ($y = 0; $y < count($pprices); $y++) {
+                $summation += (int) $pprices[$y];
+            }
+            $detailsArr = [
+                'p_name' => $pnames,
+                'p_weight' => $pweights,
+                'p_price' => $pprices,
+            ];
+            if (Auth::user()->role == 'manager') {
+                $bazars = BazarsTable::find($id);
+                $bazars->user_id = $request->user_id;
+                $bazars->date = $request->date;
+                $bazars->total = $summation;
+                $bazars->details = json_encode($detailsArr);
+                $bazars->status = true;
+                $bazars->role = User::find($user_id)->role;
+                $bazars->batch = $this->batch;
+                $bazars->updated_at = Carbon::now();
+                $bazars->save();
+            }
         }
-        $detailsArr = [
-            'p_name' => $pnames,
-            'p_weight' => $pweights,
-            'p_price' => $pprices,
-        ];
-        if (Auth::user()->role == 'manager') {
-            $bazars = BazarsTable::find($id);
-            $bazars->user_id = $request->user_id;
-            $bazars->date = $request->date;
-            $bazars->total = $summation;
-            $bazars->details = json_encode($detailsArr);
-            $bazars->status = true;
-            $bazars->role = User::find($user_id)->role;
-            $bazars->batch = $this->batch;
-            $bazars->updated_at = Carbon::now();
-            $bazars->save();
-        }
-        return redirect()->route('bazarstable.index');
+        return redirect()->route('bazarstable.index')->with('success', 'Bazars Updated Successfully !');
     }
     public function bazarstatus(Request $request, $id)
     {
@@ -129,11 +159,11 @@ class BazarsTableController extends Controller
             $statusFind->status = true;
             $statusFind->save();
         }
-        return redirect()->route('bazarstable.index');
+        return redirect()->route('bazarstable.index')->with('Success', 'Successfully Accecpt Bazars');
     }
     public function destroy(string $id)
     {
         BazarsTable::find($id)->delete();
-        return redirect()->route('bazarstable.index');
+        return redirect()->route('bazarstable.index')->with('Success', 'Successfully Deleted Bazar');
     }
 }

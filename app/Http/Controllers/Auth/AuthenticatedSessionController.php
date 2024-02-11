@@ -41,7 +41,7 @@ class AuthenticatedSessionController extends Controller
                 $url = route('welcome');
         }
         session()->put('dates', now()->format('M-Y'));
-        return redirect()->intended($url);
+        return redirect()->intended($url)->with('success', 'LoggIn Successful !');
     }
 
     /**
@@ -55,6 +55,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Logg Out Successful !');
     }
 }

@@ -36,81 +36,35 @@
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              You have 4 new notifications
+              You have 0 new notifications
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li class="notification-item">
               <i class="bi bi-exclamation-circle text-warning"></i>
               <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
+                <h4>Request</h4>
+                <p>no request pending</p>
                 <p>30 min. ago</p>
               </div>
             </li>
-
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
+          </ul>
+        </li>
     </ul>
       <ul class="d-flex align-items-center">
         <li class="nav-item dropdown pe-3">
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="{{asset('uploads')}}/profile_img/{{Auth::user()->photo}}" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->name}}</span>
-          </a><!-- End Profile Iamge Icon -->
+          </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{Auth::user()->name}}</h6>
@@ -157,13 +111,13 @@
                 @csrf
               </form>
             </li>
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
+          </ul>
+        </li>
         <li class="nav-item pe-3 arrow-dropdown" onclick="showMediaHide()">
           <a class="nav-link nav-arrow" href="#">&#9207;</a>
         </li>
       </ul>
-    </nav><!-- End Icons Navigation -->
+    </nav>
   </header>
 <script>
  function showMediaHide() {
@@ -173,14 +127,11 @@
     document.body.addEventListener('click', function (event) {
       var mediaHide = document.getElementById('mediaHide');
       var targetElement = event.target;
-
-      // Check if the click is outside of mediaHide and the arrow-dropdown
       if (!mediaHide.contains(targetElement) && targetElement.className !== 'nav-link nav-arrow') {
         mediaHide.classList.remove('show');
       }
     });
 </script>
-  <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -203,7 +154,6 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-signature"></i></span>
                 <input type="text" name="name" class="form-control" id="name" required autofocus autocomplete="name"
                   value="{{Auth::user()->name}}">
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -212,7 +162,6 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-envelope"></i></span>
                 <input type="username" name="username" class="form-control" id="username" autocomplete="username"
                   value="{{Auth::user()->username}}">
-                <x-input-error :messages="$errors->get('username')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -221,7 +170,6 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-envelope"></i></span>
                 <input type="email" name="email" class="form-control" id="email" autocomplete="email"
                   value="{{Auth::user()->email}}">
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -230,16 +178,13 @@
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-phone"></i></span>
                 <input type="text" name="phone" class="form-control" id="phone" required autocomplete="phone"
                   value="{{Auth::user()->phone}}">
-                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
               <label for="photo" class="form-label"><strong>Profile Photo</strong></label>
               <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-image"></i></span>
-
                 <input type="file" name="photo" class="form-control" id="photo">
-                <x-input-error :messages="$errors->get('photo')" class="mt-2" />
               </div>
             </div>
             <div class="col-12">
@@ -250,7 +195,6 @@
                   <option value="manager">manager</option>
                   <option value="mate">mate</option>
                 </select>
-                <x-input-error :messages="$errors->get('role')" class="mt-2" />
               </div>
             </div>
             <div class="modal-footer">
@@ -259,7 +203,6 @@
             </div>
           </form>
         </div>
-
       </div>
     </div>
   </div>

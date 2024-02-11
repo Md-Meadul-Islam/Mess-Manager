@@ -107,9 +107,6 @@ class ManagerMateController extends Controller
                 $totalMeals += $value;
             }
             $allbazar = BazarsTable::where('batch', $this->batch)->where('status', true)->whereMonth('date', (int) $sessionDate->month)->groupBy('user_id')->select('user_id', \DB::raw('SUM(total) as total'))->get();
-
-            $monthlyDetails = MonthlyTable::where('batch', $this->batch)->where("month", session('dates'))->first();
-            $mealRate = ($totalbazar + $monthlyDetails->expence_total) / $totalMeals;
             MonthlyTable::updateOrInsert(
                 [
                     'batch' => $this->batch,
@@ -120,10 +117,26 @@ class ManagerMateController extends Controller
                     'totalmeals' => $totalMeals,
                     'dailybazar' => json_encode($allbazar),
                     'totalbazar' => $totalbazar,
-                    'meal_rate' => $mealRate,
-                    'batch' => $this->batch
                 ],
             );
+            $monthlyDetails = MonthlyTable::where('batch', $this->batch)->where("month", session('dates'))->first();
+            if (!($totalMeals && $totalbazar) <= 0) {
+                $monthlyDetails = MonthlyTable::where('batch', $this->batch)->where("month", session('dates'))->first();
+                if ($monthlyDetails->expence_total == 0) {
+                    $mealRate = $totalbazar / $totalMeals;
+                } else
+                    $mealRate = ($totalbazar + $monthlyDetails->expence_total) / $totalMeals;
+                MonthlyTable::updateOrInsert(
+                    [
+                        'batch' => $this->batch,
+                        'month' => session('dates'),
+                    ],
+                    [
+                        'meal_rate' => $mealRate,
+                    ],
+                );
+            }
+
         }
         return view('manager_mate.dashboard', compact('users', 'bazarsArr', 'allMeals', 'monthlyDetails'));
     }

@@ -7,6 +7,7 @@ use App\Models\MealsTable;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -78,11 +79,13 @@ class MealsTableController extends Controller
     {
         $column_name = 'day_' . $column;
         $users = User::where('batch', $this->batch)->where('status', 'active')->get();
-        if (Auth::user()->role == 'manager' && MealsTable::first($column_name)->$column_name == null) {
-            $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
+        $mealTableArray = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
+        if (Auth::user()->role == 'manager' && $mealTableArray[0]->$column_name == null) {
+            $mealTableEdit = $mealTableArray;
         } elseif (Auth::user()->role == 'manager' && $column > (int) date('d') - 7) {
-            $mealTableEdit = MealsTable::select([$column_name, 'user_id', 'month'])->where('batch', $this->batch)->where('month', session('dates'))->with('user')->get();
+            $mealTableEdit = $mealTableArray;
         }
+
         return view('manager_mate.meals_table.edit', compact('mealTableEdit', 'column_name'));
     }
 
@@ -98,7 +101,9 @@ class MealsTableController extends Controller
             'dinner.*' => ['required', 'integer', 'max:10'],
         ]);
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            $errors = $validator->errors()->all();
+            $updateErrors = Arr::flatten($errors);
+            return back()->with('errors', $updateErrors);
         } else {
             for ($i = 0; $i < count($request->user_id); $i++) {
                 $meals = [];
@@ -114,7 +119,7 @@ class MealsTableController extends Controller
                     'updated_at' => now(),
                 ]);
             }
-            return redirect()->route('mealstable.index');
+            return redirect()->route('mealstable.index')->with('success', 'Meals Updated Successfully !');
         }
     }
 }

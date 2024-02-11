@@ -72,7 +72,7 @@
 </style>
 <div class="row">
     <div class="col-lg-12">
-        <h1>Bazars Details</h1>
+        <h2>Bazars Details</h2>
         <div class="card">
             <div class="card-header">
                 @if (session('dates') === now()->format('M-Y'))

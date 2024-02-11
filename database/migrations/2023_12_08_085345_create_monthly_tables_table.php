@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('monthly_tables', function (Blueprint $table) {
             $table->id();
-            $table->text('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('month')->default(now()->format("M-Y"));
             $table->text('dailymeals')->default(0);
             $table->bigInteger('totalmeals')->default(0);
@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->float('meal_rate')->default(0);
             $table->string('batch')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

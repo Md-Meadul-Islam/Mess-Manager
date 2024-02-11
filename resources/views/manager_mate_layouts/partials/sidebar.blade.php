@@ -38,7 +38,13 @@
             <span style='display:flex;margin-right:10px; width:16px; height:16px; justify-content:center; align-items:center;'>🕞</span>
             <span>  Task</span>
           </a>
-        </li><!-- End Dashboard Nav -->        
+        </li>   
+        <li class="nav-item{{ request()->routeIs('dashboard.tolet') ? ' active' : '' }}">
+          <a class="dashboardtolet nav-link " href="javascript:void(0)">
+            <span style='display:flex;margin-right:10px; width:16px; height:16px; justify-content:center; align-items:center;'>📋</span>
+            <span>  To-Let</span>
+          </a>
+        </li>   
       </ul>
      </div>
      <hr>
