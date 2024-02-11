@@ -6,19 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.9, user-scalable=0, minimal-ui">
     <meta name="description"
-      content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. Many things have to be calculated in the mess like Meal calculation, Bazar calculation, monthly Expenses, Other expenses like (Gas bill, Water bill).">
+      content="Organize your Messy Life. Create Mess To-Let. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess.">
     <meta name="keywords"
-      content="Mess Manager, Meal Manager, Mess Management System, Bachelor Life, Bachelor, Meal Calculation, Meal Management, Mess To-let, To Let, Expense Manager, mess, mess manager, mess apps,mess life, mess organize, room, roommate, roommates, room-mate, manager, member, blooms, blooms-ai.com, ">
+      content="mess manager, meal manager, bachelor life, bachelor, meal Calculation, meal management, mess to-let, to let, to-let, expense manager, mess, mess manager app, mess life, mess organize, room, roommate, roommates, room-mate, manager, member, blooms, blooms-ai.com">
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Mess Manager App" />
-    <meta property="og:title" content="Mess Manager App | Meal Manager App | To Let" />
+    <meta property="og:site_name" content="To-Let & Mess Manager" />
+    <meta property="og:title" content="To-Let & Mess Manager" />
     <meta property="og:description"
-      content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. | Mess Manager, Meal Manager, Mess Management System : Expense & Meal Calculation | Mess To-Let" />
+      content="Organize your Messy Life. Create Mess To-Let. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess."/>
     <meta property="og:image" content="https://www.messmanager.blooms-ai.com/img/logo.png" />
     <meta property="og:url" content="https://www.messmanager.blooms-ai.com/" />
-    <meta itemprop="name" content="Mess Manager App | Meal Manager App | To Let" />
+    <meta itemprop="name" content="To-Let & Mess Manager" />
     <meta itemprop="description"
-      content="Mess Manager, Meal Manager, Mess Management System Bachelor Life, Bachelor, Mess Expense & Meal Calculation | Mess To-Let | মেসের মিলস, বাজারসহ যাবতীয় খরচ হিসাব করুন কোনো ঝামেলা ছাড়াই! " />
+      content="Organize your Messy Life. Create Mess To-Let | মেসের মিলস, বাজারসহ যাবতীয় খরচ হিসাব করুন কোনো ঝামেলা ছাড়াই! " />
     <meta itemprop="image" content="https://www.messmanager.blooms-ai.com/img/logo.png" />
     <meta name="google-adsense-account" content="ca-pub-3304643762159808">
     <meta name="robots" content="index, follow">
