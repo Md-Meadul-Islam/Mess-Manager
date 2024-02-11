@@ -6,19 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.9, user-scalable=0, minimal-ui">
     <meta name="description"
-      content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. Many things have to be calculated in the mess like Meal calculation, Bazar calculation, monthly Expenses, Other expenses like (Gas bill, Water bill), mess members leaving the mess and new members joining. You can calculate everything in this one App.">
+      content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. Many things have to be calculated in the mess like Meal calculation, Bazar calculation, monthly Expenses, Other expenses like (Gas bill, Water bill).">
     <meta name="keywords"
-      content="Mess Manager, Meal Manager, Mess Management System, Meal Calculation, Meal Management, Mess To-let, Expense Manager, mess, mess manager, mess apps,mess life, mess organize, room, roommate, roommates, room-mate, manager, member, blooms, blooms-ai.com, ">
+      content="Mess Manager, Meal Manager, Mess Management System, Bachelor Life, Bachelor, Meal Calculation, Meal Management, Mess To-let, To Let, Expense Manager, mess, mess manager, mess apps,mess life, mess organize, room, roommate, roommates, room-mate, manager, member, blooms, blooms-ai.com, ">
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mess Manager App" />
-    <meta property="og:title" content="Mess Manager App | Meal Manager App" />
+    <meta property="og:title" content="Mess Manager App | Meal Manager App | To Let" />
     <meta property="og:description"
       content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. | Mess Manager, Meal Manager, Mess Management System : Expense & Meal Calculation | Mess To-Let" />
     <meta property="og:image" content="https://www.messmanager.blooms-ai.com/img/logo.png" />
     <meta property="og:url" content="https://www.messmanager.blooms-ai.com/" />
-    <meta itemprop="name" content="Mess Manager App | Meal Manager App" />
+    <meta itemprop="name" content="Mess Manager App | Meal Manager App | To Let" />
     <meta itemprop="description"
-      content="মেসের মিলসহ যাবতীয় খরচ অটোমেটিকালি হিসাব করুন | Mess Manager, Meal Manager, Mess Management System : Expense & Meal Calculation | Mess To-Let" />
+      content="Mess Manager, Meal Manager, Mess Management System Bachelor Life, Bachelor, Mess Expense & Meal Calculation | Mess To-Let | মেসের মিলস, বাজারসহ যাবতীয় খরচ হিসাব করুন কোনো ঝামেলা ছাড়াই! " />
     <meta itemprop="image" content="https://www.messmanager.blooms-ai.com/img/logo.png" />
     <meta name="google-adsense-account" content="ca-pub-3304643762159808">
     <meta name="robots" content="index, follow">
@@ -41,156 +41,161 @@
     <title>Mess Manager</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3304643762159808"
       crossorigin="anonymous"></script>
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
   </head>
 
   <body>
-    <div>
-      <header id="header" class="header fixed-top d-flex align-items-center">
-        <div class="d-flex align-items-center justify-content-between">
-          <a href="#" class="logo d-flex align-items-center">
-            <img src="{{asset('backend')}}/img/logo.png" alt="M">
-            <span class="d-none d-lg-block">Mess Manager</span>
-          </a>
-        </div><!-- End Logo -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="#" class="logo d-flex align-items-center">
+          <img src="{{asset('backend')}}/img/logo.png" alt="M">
+          <span class="d-none d-lg-block">Mess Manager</span>
+        </a>
+      </div><!-- End Logo -->
 
-        <nav class="header-nav mx-auto d-flex">
-          <ul class="d-flex flex-start justify-content-center">
-            <li class="nav-item d-block">
-              <a class="nav-link px-2" title="Home" href="#intro">Home</a>
-            </li>
-            <li class="nav-item d-block">
-              @auth
-              <a class="nav-link px-2" href="{{route('manager_mate.dashboard')}}">Dashboard</a>
-              @endauth
-            </li>
-            <li class="nav-item d-block">
-              <a class="nav-link px-2" title="FAQ" href="#doc">Doc</a>
-            </li>
-            <li class="nav-item d-block">
-              <a class="nav-link px-2" title="Contacts" href="#contact">Contact</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="d-flex align-items-center justify-content-between">
-          @auth
-          <p class="d-flex align-items-center my-5 pe-5" style="font-weight:800" title="User Name">
-            {{Auth::user()->name}}
-          </p>
-          @endauth
-        </div>
-      </header>
-      <div class="toggle-btn d-flex" onclick="toggleNav()">
-        <i class="bi bi-list"></i>
+      <nav class="header-nav mx-auto d-flex">
+        <ul class="d-flex flex-start justify-content-center">
+          <li class="nav-item d-block">
+            <a class="nav-link px-2" title="Home" href="#intro">Home</a>
+          </li>
+          <li class="nav-item d-block">
+            @auth
+            <a class="nav-link px-2" href="{{route('manager_mate.dashboard')}}">Dashboard</a>
+            @endauth
+          </li>
+          <li class="nav-item d-block">
+            <a class="nav-link px-2" title="FAQ" href="#doc">Doc</a>
+          </li>
+          <li class="nav-item d-block">
+            <a class="nav-link px-2" title="Contacts" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="d-flex align-items-center justify-content-between">
+        @auth
+        <p class="d-flex align-items-center my-5 pe-5" style="font-weight:800" title="User Name">
+          {{Auth::user()->name}}
+        </p>
+        @endauth
       </div>
-      <section id="intro" class="intro py-5" name="intro">
-        <div class="row">
-          <div class="col-12">
-            <div class="row justify-content-center px-3" style="height:100vh;">
-              <div class="col-xxl-6 col-lg-6 col-md-12 d-flex">
-                <div class="left-side-intro">
-                  <p class="welcome" style="font-size: 2rem">Welcome to</p>
-                  <h1 style="color:rgb(56, 88, 170); font-family:fantasy;">Mess Manager Application</h1>
-                  <h4>Organize your messy life.</h4>
-                  <div>
-                    @auth
-                    <a href="{{route('logout')}}" class="btn btn-warning btn-outline-success px-5 my-2"
-                      onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Sign Out</a>
-                    @endauth
-                    <form id="logout_form" action="{{route('logout')}}" method="POST">
-                      @csrf
-                    </form>
-                    @guest
-                    <a href="{{route('login')}}" class="btn btn-warning btn-outline-success px-5 my-2">Login</a>
-                    <a href="{{route('register')}}" class="btn btn-success btn-outline-warning px-5 my-2">Register</a>
-                    @endguest
-                  </div>
+    </header>
+    <div class="toggle-btn d-flex" onclick="toggleNav()">
+      <i class="bi bi-list"></i>
+    </div>
+    <section id="intro" class="intro py-5" name="intro">
+      <div class="row">
+        <div class="col-12">
+          <div class="row justify-content-center px-3" style="height:100vh;">
+            <div class="col-xxl-6 col-lg-6 col-md-12 d-flex">
+              <div class="left-side-intro">
+                <p class="welcome" style="font-size: 2rem">Welcome to</p>
+                <h1 style="color:rgb(56, 88, 170); font-family:fantasy;">Mess Manager Application</h1>
+                <h4>Organize your Bachelor Life.</h4>
+                <div>
+                  @auth
+                  <a href="{{route('logout')}}" class="btn btn-warning btn-outline-success px-5 my-2"
+                    onclick="event.preventDefault(); document.getElementById('logout_form').submit();">Sign Out</a>
+                  @endauth
+                  <form id="logout_form" action="{{route('logout')}}" method="POST">
+                    @csrf
+                  </form>
+                  @guest
+                  <a href="{{route('login')}}" class="btn btn-warning btn-outline-success px-5 my-2">Login</a>
+                  <a href="{{route('register')}}" class="btn btn-success btn-outline-warning px-5 my-2">Register</a>
+                  @endguest
                 </div>
               </div>
-              <div class="col-xxl-6 col-lg-6 col-md-12 d-flex">
-                <div class="video-wrapper">
-                  <video controls muted>
-                    <source src="{{asset('frontend')}}/files/Mess_Manager_intro.webm">
-                  </video>
-                </div>
+            </div>
+            <div class="col-xxl-6 col-lg-6 col-md-12 d-flex">
+              <div class="video-wrapper">
+                <video controls muted>
+                  <source src="{{asset('frontend')}}/files/Mess_Manager_intro.webm">
+                </video>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <section class="tolet" id="tolet" name="tolet">
-        <h2 class="text-center" style="font-family: fantasy,cursive; letter-spacing:1px; color:rgb(125, 151, 141);">
-          To-Let</h2>
-        <div class="col-12 px-3">
-          <div class="row">
-            <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-around">
-              <div>
-                <button type="submit" class="btn toletAddBtn" style="background-color:rgb(56, 88, 170); color:white">Add
-                  To-Let</button>
-              </div>
-              <div class="mx-3 position-relative searchContainer">
-                <div class="searchDiv position-relative">
-                  <input id="search" class="searchString form-control border-2 border-secondary py-3 px-4 rounded-pill"
-                    type="text" placeholder="Search">
-                  <button type="submit" id="mainsearch"
-                    class="btn btn-primary border-2 border-secondary py-3 position-absolute rounded-pill text-white h-100"
-                    style="top:0; right:0; width:4rem"><i class="fas fa-search"></i>
-                  </button>
-                </div>
-                <div class="resultBox">
-                </div>
-              </div>
+      </div>
+    </section>
+    <section class="tolet" id="tolet" name="tolet">
+      <h2 class="text-center" style="font-family: fantasy,cursive; letter-spacing:1px; color:rgb(125, 151, 141);">
+        To-Let</h2>
+      <div class="col-12 px-3">
+        <div class="row">
+          <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-around">
+            <div>
+              <button type="submit" class="btn toletAddBtn" style="background-color:rgb(56, 88, 170); color:white">Add
+                To-Let</button>
             </div>
-            <div class="col-md-6 col-sm-12 text-start align-items-center">
-              <div>
-                <p class="text-start">Result produce based on Your Area by default </p>
+            <div class="mx-3 position-relative searchContainer">
+              <div class="searchDiv position-relative">
+                <input id="search" class="searchString form-control border-2 border-secondary py-3 px-4 rounded-pill"
+                  type="text" placeholder="Search">
+                <button type="submit" id="mainsearch"
+                  class="btn btn-primary border-2 border-secondary py-3 position-absolute rounded-pill text-white h-100"
+                  style="top:0; right:0; width:4rem"><i class="fas fa-search"></i>
+                </button>
               </div>
-              <div class="d-flex align-items-center">
-                <p class="village btn btn-outline-success m-1"></p>
-                <p class="town btn btn-outline-success m-1"></p>
-                <p class="city btn btn-outline-success m-1"></p>
+              <div class="resultBox">
               </div>
             </div>
           </div>
-          <div class="row p-2">
-            <div class="col-12">
-              <style>
-                .addtolet {
-                  display: none;
-                  scroll-behavior: smooth;
-                  transition: .25s ease-out;
-                }
+          <div class="col-md-6 col-sm-12 text-start align-items-center">
+            <div>
+              <p class="text-center">Result produce based on Your Area-</p>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+              <p class="text-center" style="font-family: fantasy;">
+                <span class="village"></span> >
+                <span class="town"></span> >
+                <span class="city"></span> >
+                <span class="country"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <style>
+          .addtolet {
+            display: none;
+            scroll-behavior: smooth;
+            transition: .25s ease-out;
+          }
 
-                .show {
-                  display: block;
-                  scroll-behavior: smooth;
-                  transition: .25s ease-in;
-                }
-              </style>
-              <div class="row d-flex position-relative" style="z-index: 500">
-                <div class="col-lg-4 col-md-6 col-sm-12 addtolet" style="position: absolute;z-index:501">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="col-12">
-                        <label for="title" class="form-label"><strong>Title</strong><span
-                            style="color:red;padding-left:5px">*</span></label>
-                        <div class="input-group">
-                          <span class="input-group-text" id="inputGroupPrepend"><i
-                              class="fa-solid fa-signature"></i></span>
-                          <input type="text" name="title" class="form-control" id="title" required autofocus
-                            autocomplete="title" placeholder="eg. {{__('Roommate Require')}}">
-                        </div>
+          .show {
+            display: block;
+            scroll-behavior: smooth;
+            transition: .25s ease-in;
+          }
+        </style>
+        <div class="row p-2">
+          <div class="col-12">
+            <div class="row d-flex position-relative" style="z-index: 500">
+              <div class="col-lg-4 col-md-6 col-sm-12 addtolet" style="position: absolute;z-index:501">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="col-12">
+                      <label for="title" class="form-label"><strong>Title</strong><span
+                          style="color:red;padding-left:5px">*</span></label>
+                      <div class="input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i
+                            class="fa-solid fa-signature"></i></span>
+                        <input type="text" name="title" class="form-control" id="title" required autofocus
+                          autocomplete="title" placeholder="eg. {{__('Roommate Require')}}">
                       </div>
-                      <div class="col-12">
+                    </div>
+                    <div class="col-12">
                         <label for="month" class="form-label"><strong>{{__('Month From')}}</strong><span
                             style="color:red;padding-left:5px">*</span></label>
                         <div class="input-group">
-                          <span class="input-group-text" id="inputGroupPrepend">📅</span>
-                          <select name="month" id="month" class="form-select">
-                            @for ($i = 0; $i <6; $i++) @php $date=now()->addMonths(($i));
-                              @endphp
-                              <option value="{{$date->format('M-Y')}}" <?php if ($date->format('M-Y') ==
-                                now()->format('M-Y'))
-                                echo "selected" ?>>
+                        <span class="input-group-text" id="inputGroupPrepend">📅</span>
+                        <select name="month" id="month" class="form-select">
+                          @for ($i = 0; $i <6; $i++) @php $date=now()->addMonths(($i));
+                            @endphp
+                            <option value="{{$date->format('M-Y')}}" <?php if (
+                              $date->format('M-Y') ==
+                              now()->format('M-Y')
+                            )
+                              echo "selected" ?>>
                                 {{$date->format('M-Y')}}
                               </option>
                               @endfor
@@ -246,9 +251,42 @@
                     </div>
                   </div>
                 </div>
-                <div class="toletsdiv">
-                  <div class="row viewtolets d-flex"></div>
-                </div>               
+              </div>
+              <div class="row viewtolets d-flex justify-content-center align-items-center">
+                <style>
+                  .loader {
+                      border: 2px solid;
+                      border-color: transparent #FFF;
+                      width: 48px;
+                      height: 48px;
+                      border-radius: 50%;
+                      display: inline-block;
+                      position: relative;
+                      box-sizing: border-box;
+                      animation: rotation 2s linear infinite;
+                    }
+                    .loader::after {
+                      content: '';  
+                      box-sizing: border-box;
+                      position: absolute;
+                      left: 50%;
+                      top: 50%;
+                      border: 24px solid;
+                      border-color: transparent rgba(255, 255, 255, 0.15);
+                      border-radius: 50%;
+                      transform: translate(-50%, -50%);
+                    }
+
+                    @keyframes rotation {
+                      0% {
+                        transform: rotate(0deg);
+                      }
+                      100% {
+                        transform: rotate(360deg);
+                      }
+                    } 
+                </style>
+                <span class="loader"></span>
               </div>
             </div>
           </div>
@@ -337,8 +375,7 @@
                 </div>
                 <div class="input-group p-2">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i
-                        class="bi bi-telephone-outbound-fill"></i></span>
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone-outbound-fill"></i></span>
                   </div>
                   <a href="#" class="p-2">+8801862151631</a>
                 </div>
@@ -361,66 +398,65 @@
           Designed by <a href="#"><strong>Blooms-AI</strong></a>
         </div>
       </footer>
-    </div>
-    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="{{asset('backend')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/fontawesome.min.js"></script>
-    <script src="{{asset('backend')}}/js/main.js"></script>
-    <script src="{{asset('frontend')}}/welcome.js"></script>
-    @include('tolets.toletajax_js')
-    <script>
-      var suggestions = [];
-      document.addEventListener("DOMContentLoaded", function () {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "{{ route('searchKey') }}", true);
-        xhr.onload = function () {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            suggestions = JSON.parse(xhr.responseText);
+      <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+      <script src="{{asset('backend')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/fontawesome.min.js"></script>
+      <script src="{{asset('backend')}}/js/main.js"></script>
+      <script src="{{asset('frontend')}}/welcome.js"></script>
+      @include('tolets.toletajax_js')
+      <script>
+        var suggestions = [];
+        document.addEventListener("DOMContentLoaded", function () {
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET", "{{ route('searchKey') }}", true);
+          xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              suggestions = JSON.parse(xhr.responseText);
+            }
+          };
+          xhr.send();
+        });
+        const searchInput = document.querySelector(".searchDiv");
+        const input = searchInput.querySelector(".searchString");
+        const resultBox = document.querySelector(".resultBox");
+        const li = resultBox.querySelectorAll('li');
+        input.onkeyup = (e) => {
+          let userData = e.target.value;
+          let emptyArray = [];
+          if (userData) {
+            emptyArray = suggestions.filter((data) => {
+              return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+            });
+            emptyArray = emptyArray.map((data) => {
+              return data = '<li>' + data + '</li>';
+            });
+            resultBox.style.display = 'block'
+            showSuggestions(emptyArray);
+            let allList = resultBox.querySelectorAll("li");
+            for (let i = 0; i < allList.length; i++) {
+              allList[i].setAttribute("onclick", "select(this)");
+            }
+          } else {
+            resultBox.style.display = 'none';
           }
-        };
-        xhr.send();
-      });
-      const searchInput = document.querySelector(".searchDiv");
-      const input = searchInput.querySelector(".searchString");
-      const resultBox = document.querySelector(".resultBox");
-      const li = resultBox.querySelectorAll('li');
-      input.onkeyup = (e) => {
-        let userData = e.target.value;
-        let emptyArray = [];
-        if (userData) {
-          emptyArray = suggestions.filter((data) => {
-            return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
-          });
-          emptyArray = emptyArray.map((data) => {
-            return data = '<li>' + data + '</li>';
-          });
-          resultBox.style.display = 'block'
-          showSuggestions(emptyArray);
-          let allList = resultBox.querySelectorAll("li");
-          for (let i = 0; i < allList.length; i++) {
-            allList[i].setAttribute("onclick", "select(this)");
+        }
+        function showSuggestions(list) {
+          let listData;
+          if (!list.length) {
+            userValue = input.value;
+            listData = '<li>' + userValue + '</li>';
+          } else {
+            listData = list.join('');
           }
-        } else {
+          resultBox.innerHTML = listData;
+        }
+        function select(d) {
+          input.value = d.innerHTML;
           resultBox.style.display = 'none';
         }
-      }
-      function showSuggestions(list) {
-        let listData;
-        if (!list.length) {
-          userValue = input.value;
-          listData = '<li>' + userValue + '</li>';
-        } else {
-          listData = list.join('');
-        }
-        resultBox.innerHTML = listData;
-      }
-      function select(d) {
-        input.value = d.innerHTML;
-        resultBox.style.display = 'none';
-      }
-    </script>
-    {{-- {!! Toastr::message() !!} --}}
-  </body>
+      </script>
+      {{-- {!! Toastr::message() !!} --}}
+    </body>
 
-</html>
+  </html>

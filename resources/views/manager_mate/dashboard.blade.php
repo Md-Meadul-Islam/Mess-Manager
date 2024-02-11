@@ -1,7 +1,7 @@
 @extends('manager_mate_layouts.app')
 @section('manager_title', 'Manager | Dashboard')
 @section('manager_content')
-<div class="row">
+<div class="row mainrow">
   <!-- Left side columns -->
   <div class="col-lg-8">
     <div class="row">
@@ -172,7 +172,6 @@
       </div>
     </div>    
   </div><!-- End Left side columns -->
-
   <!-- Right side columns -->
   <div class="col-lg-4">
     <!-- Recent Activity -->
@@ -249,7 +248,6 @@
     </div><!-- End Recent Activity -->
     
   </div><!-- End Right side columns -->
-
     <!-- Left side columns -->
     <div class="col-lg-12">
       <div class="row">

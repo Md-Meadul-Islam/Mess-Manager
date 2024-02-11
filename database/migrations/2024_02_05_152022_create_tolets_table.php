@@ -12,6 +12,8 @@ return new class extends Migration {
     {
         Schema::create('tolets', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('ip', 100)->nullable();
             $table->string('title', 100);
             $table->string('from_month', 100);
             $table->string('details');
@@ -20,6 +22,7 @@ return new class extends Migration {
             $table->string('photo_1')->default('toletdefault.png');
             $table->string('photo_2')->default('toletdefault.png');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

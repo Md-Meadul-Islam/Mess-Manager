@@ -19,25 +19,18 @@ class WelcomeController extends Controller
         $town = $request->town;
         $city = $request->city;
         $country = $request->country;
-        if ($request->all() == []) {
-            $user_ip = getenv('REMOTE_ADDR');
-            $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
-            $country = $geo["geoplugin_countryName"];
-            $city = $geo["geoplugin_city"];
-        }
-        $queryStringArray = [$village, $town, $city];
-        $tolets = Tolets::latest();
+        $queryStringArray = [$village, $town, $city, $country];
+        $tolets = Tolets::orderBy('from_month', 'ASC');
         foreach ($queryStringArray as $query) {
-            $tolets->where(function ($q) use ($query) {
+            $tolets->orWhere(function ($q) use ($query) {
                 $q->where('address', 'like', '%' . $query . '%');
             });
         }
-        $tolets = $tolets->paginate(12);
+        $tolets = $tolets->paginate(8);
         if ($tolets->count() >= 1) {
-            $htmlTolets = view('tolets.viewtolet', compact('tolets'))->render();
-            return response()->json(['village' => $village, 'city' => $city, 'town' => $town, 'tolets' => $htmlTolets]);
+            return view('tolets.viewtolet', compact('tolets'))->render();
         } else {
-            return response()->json(['message' => 'No To-Let Found for these area. Please Search more.']);
+            return response()->json('No To-Let Found for this area. For better result, on your device location and reload this page or Search with To-Let address.');
         }
     }
     public function makeTolet(Request $request)
@@ -63,25 +56,27 @@ class WelcomeController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()], 422);
         } else {
-            Tolets::create([
-                'title' => $request->title,
-                'from_month' => $request->month,
-                'details' => $request->details,
-                'address' => $request->address,
-                'contacts' => $request->contact,
-                'photo_1' => $imageNames['photo1'] ?? 'toletdefault.png',
-                'photo_2' => $imageNames['photo2'] ?? 'toletdefault.png',
-                'created_at' => now(),
-            ]);
-            return response()->json(['message' => 'To-Let Created Sucessful !'], 200);
-            // if (Auth::user()) {
-            //     if (Auth::user()->role == 'manager') {
-            //     } else {
-            //         return response()->json(['message' => 'Only Manager can Create a To Let!'], 422);
-            //     }
-            // } else {
-            //     return response()->json(['message' => 'You Should Log In First!'], 421);
-            // }
+            if (Auth::user()) {
+                if (Auth::user()->role == 'manager') {
+                    Tolets::create([
+                        'user_id' => Auth::user()->id ?? null,
+                        'ip' => $_SERVER['REMOTE_ADDR'],
+                        'title' => $request->title,
+                        'from_month' => $request->month,
+                        'details' => $request->details,
+                        'address' => $request->address,
+                        'contacts' => $request->contact,
+                        'photo_1' => $imageNames['photo1'] ?? 'toletdefault.png',
+                        'photo_2' => $imageNames['photo2'] ?? 'toletdefault.png',
+                        'created_at' => now(),
+                    ]);
+                    return response()->json(['message' => 'To-Let Created Sucessfully !'], 200);
+                } else {
+                    return response()->json(['message' => 'Only Manager can Create a To-Let!'], 422);
+                }
+            } else {
+                return response()->json(['message' => 'You Should Log In First!'], 421);
+            }
         }
     }
     public function searchKey()
@@ -112,5 +107,10 @@ class WelcomeController extends Controller
         } else {
             return response()->json(['error' => 'You can search with letters and spaces for all languages.'], 422);
         }
+    }
+    public function toletPagination()
+    {
+        $tolets = Tolets::latest()->paginate(8);
+        return view('tolets.viewtolet', compact('tolets'))->render();
     }
 }

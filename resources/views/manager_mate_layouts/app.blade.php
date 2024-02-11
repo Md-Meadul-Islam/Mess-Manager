@@ -6,24 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.9, user-scalable=0, minimal-ui">
     <meta name="description"
-      content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. Many things have to be calculated in the mess like Meal calculation, Bazar calculation, monthly Expenses, Other expenses like (Gas bill, Water bill), mess members leaving the mess and new members joining. You can calculate everything in this one App.">
+      content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. Many things have to be calculated in the mess like Meal calculation, Bazar calculation, monthly Expenses, Other expenses like (Gas bill, Water bill).">
     <meta name="keywords"
-      content="Mess Manager, Meal Manager, Mess Management System, Meal Calculation, Meal Management, Mess To-let, Expense Manager, mess, mess manager, mess apps,mess life, mess organize, room, roommate, roommates, room-mate, manager, member, blooms, blooms-ai.com, ">
+      content="Mess Manager, Meal Manager, Mess Management System, Bachelor Life, Bachelor, Meal Calculation, Meal Management, Mess To-let, To Let, Expense Manager, mess, mess manager, mess apps,mess life, mess organize, room, roommate, roommates, room-mate, manager, member, blooms, blooms-ai.com, ">
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mess Manager App" />
-    <meta property="og:title" content="Mess Manager App | Meal Manager App" />
+    <meta property="og:title" content="Mess Manager App | Meal Manager App | To Let" />
     <meta property="og:description"
       content="Organize your Messy Life. If you are in a Mess and if your mess has a Manager and some mess Members then this App is for you and your mess. | Mess Manager, Meal Manager, Mess Management System : Expense & Meal Calculation | Mess To-Let" />
     <meta property="og:image" content="https://www.messmanager.blooms-ai.com/img/logo.png" />
     <meta property="og:url" content="https://www.messmanager.blooms-ai.com/" />
-    <meta itemprop="name" content="Mess Manager App | Meal Manager App" />
+    <meta itemprop="name" content="Mess Manager App | Meal Manager App | To Let" />
     <meta itemprop="description"
-      content="মেসের মিলসহ যাবতীয় খরচ হিসাব করুন | Mess Manager, Meal Manager, Mess Management System : Expense & Meal Calculation | Mess To-Let" />
+      content="Mess Manager, Meal Manager, Mess Management System Bachelor Life, Bachelor, Mess Expense & Meal Calculation | Mess To-Let | মেসের মিলস, বাজারসহ যাবতীয় খরচ হিসাব করুন কোনো ঝামেলা ছাড়াই! " />
     <meta itemprop="image" content="https://www.messmanager.blooms-ai.com/img/logo.png" />
     <meta name="google-adsense-account" content="ca-pub-3304643762159808">
     <meta name="robots" content="index, follow">
-    <meta name ="rating" content="adult">
+    <meta name="rating" content="adult">
     <meta name="author" content="Blooms-AI">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="https://www.messmanager.blooms-ai.com/" />
     <title>@yield('manager_title')</title>
     <link href="{{asset('backend')}}/img/favicon.png" rel="icon">
@@ -75,6 +76,7 @@
       integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{asset('backend')}}/js/main.js"></script>
+    @include('manager_mate_layouts.dashboard_ajax')
     @if(Session::has('errors'))
     @foreach(Session::get('errors') as $error)
     <script>

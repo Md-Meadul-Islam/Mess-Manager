@@ -17,49 +17,48 @@
                 $('.village').text(village);
                 $('.town').text(town);
                 $('.city').text(city);
+                $('.country').text(country);
                 $.ajax({
                     url:"{{route('viewtolet')}}",
                     method: "GET",
                     data:{village:village, town:town, city:city, country:country},
                     success:function(res){
-                        $('.village').text(res.village);
-                        $('.town').text(res.town);
-                        $('.city').text(res.city);
-                        $('.viewtolets').html(res.tolets);
-                        $('.viewtolets').html(res.message);
+                        $('.viewtolets').html(res);
                     }
                 })
             }).fail(function() {
                 console.log('Error fetching your local address');
             }); 
         },()=>{
+            var geoCity = geoplugin_city();
+            var geoCountry = geoplugin_countryName();
+            $('.city').text(geoCity);
+            $('.country').text(geoCountry);
             $.ajax({
                     url:"{{route('viewtolet')}}",
                     method: "GET",
+                    data:{city:geoCity, country:geoCountry},
                     success:function(res){
-                        $('.village').text(res.village);
-                        $('.town').text(res.town);
-                        $('.city').text(res.city);
-                        $('.viewtolets').html(res.tolets);
-                        $('.viewtolets').html(res.message);
+                        $('.viewtolets').html(res);
                     }
                 })
         });
-        $(document).on('click', '.pagination a', function (e) {
+         //for pagination
+         $(document).on('click', '.pagination a', function(e){
             e.preventDefault();
             let page = $(this).attr('href').split('page=')[1];
             $.ajax({
-                url: "/homepagination?page=" + page,
-                success: function (res) {
+                url:"/toletpagination?page="+page,
+                success: function(res){
                     $('.viewtolets').html(res);
                 }
             });
         });
+        // click event for tolet add btn
         $(document).on('click', '.toletAddBtn', function (e) {
             e.preventDefault();
             $('.addtolet').toggleClass('show');
         });
-
         $(document).on('click', '.saveBtn', function (e) {
             e.preventDefault();
             var formData = new FormData();
@@ -89,6 +88,7 @@
                 processData: false,
                 success: function (res) {
                     $('.addtolet').removeClass('show');
+                    $('.viewtolets').load("{{ route('viewtolet') }}");
                     toastr.success(res.message, 'Success');                    
                     toastr.options = {
                         "closeButton": true,
@@ -108,7 +108,6 @@
                     };
                 },
                 error: function (xhr) {
-                    console.log(xhr);
                     let errors = xhr.responseJSON.message;
                     toastr.error(errors, "Cancelled");
                     toastr.options = {
