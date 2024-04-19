@@ -41,7 +41,6 @@
     <title>To-Let & Mess Manager</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3304643762159808"
       crossorigin="anonymous"></script>
-    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
   </head>
 
   <body>

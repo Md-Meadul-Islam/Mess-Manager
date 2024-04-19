@@ -1,3 +1,6 @@
+<?php 
+$ip = $_SERVER['REMOTE_ADDR'];
+?>
 <script>
     $.ajaxSetup({
         headers: {
@@ -30,10 +33,13 @@
                 console.log('Error fetching your local address');
             }); 
         },()=>{
-            var geoCity = geoplugin_city();
-            var geoCountry = geoplugin_countryName();
-            $('.city').text(geoCity);
-            $('.country').text(geoCountry);
+            fetch(`https://ipapi.co/<?php echo $ip; ?>/json/`)
+            .then(response => response.json())
+            .then(data => {
+                var city = data.city;
+                var country = data.country_name;
+                $('.city').text(city);
+            $('.country').text(country);
             $.ajax({
                     url:"{{route('viewtolet')}}",
                     method: "GET",
@@ -42,6 +48,10 @@
                         $('.viewtolets').html(res);
                     }
                 })
+            })
+            .catch(error => {
+                // document.getElementById('location').innerHTML = 'Failed to retrieve location information.';
+            });
         });
          //for pagination
          $(document).on('click', '.pagination a', function(e){
